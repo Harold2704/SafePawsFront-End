@@ -1,0 +1,169 @@
+<mat-toolbar class="custom-toolbar">
+    <button mat-icon-button [matMenuTriggerFor]="mainMenu" aria-label="Abrir menú principal">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>SafePaws</span>
+</mat-toolbar>
+
+<div class="main-bg">
+  <mat-menu #mainMenu="matMenu" class="main-menu">
+      <button mat-menu-item [matMenuTriggerFor]="adoptionsMenu">
+          <mat-icon class="main-menu-icon">pets</mat-icon>
+          <span class="menu-title">Adopciones</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="clientsMenu">
+          <mat-icon class="main-menu-icon">person</mat-icon>
+          <span class="menu-title">Clientes</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="petsMenu">
+          <mat-icon class="main-menu-icon">pets</mat-icon>
+          <span class="menu-title">Mascotas</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="racesMenu">
+          <mat-icon class="main-menu-icon">category</mat-icon>
+          <span class="menu-title">Razas</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="sheltersMenu">
+          <mat-icon class="main-menu-icon">home</mat-icon>
+          <span class="menu-title">Refugios</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="donationsMenu">
+          <mat-icon class="main-menu-icon">volunteer_activism</mat-icon>
+          <span class="menu-title">Donaciones</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="commentsMenu">
+          <mat-icon class="main-menu-icon">comment</mat-icon>
+          <span class="menu-title">Comentarios</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="medicalMenu">
+          <mat-icon class="main-menu-icon">medical_services</mat-icon>
+          <span class="menu-title">Historial Médico</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="vaccineMenu">
+          <mat-icon class="main-menu-icon">vaccines</mat-icon>
+          <span class="menu-title">Vacunas</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="vaccinePetsMenu">
+          <mat-icon class="main-menu-icon">pets</mat-icon>
+          <span class="menu-title">Vacunas Mascotas</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="vouchersMenu">
+          <mat-icon class="main-menu-icon">confirmation_number</mat-icon>
+          <span class="menu-title">Vouchers</span>
+      </button>
+  </mat-menu>
+</div>
+
+<!-- Submenús para cada tabla -->
+<mat-menu #adoptionsMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/adoption/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/adoptions/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #clientsMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/client/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/clientes/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #petsMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/pet/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/pets/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #racesMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/race/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/races/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #sheltersMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/shelter/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/shelters/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #donationsMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/donations/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/donations/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #commentsMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/comments/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/comments/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #medicalMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/medicalhistory/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/medicalhistories/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #vaccineMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/vaccine/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/vaccines/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #vaccinePetsMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/vaccinePet/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/vaccinepets/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+<mat-menu #vouchersMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/voucher/list">
+        <mat-icon class="submenu-icon">list</mat-icon>
+        <span class="submenu-title">Listar</span>
+    </button>
+    <button mat-menu-item routerLink="/vouchers/registrar">
+        <mat-icon class="submenu-icon">add</mat-icon>
+        <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+
+<router-outlet></router-outlet>
