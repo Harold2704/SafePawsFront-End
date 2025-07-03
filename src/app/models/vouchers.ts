@@ -3,4 +3,4 @@ export class vouchers {
     code: string = ""
     method: string = ""
     state: boolean = false
-}
+} 

@@ -1,0 +1,102 @@
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0px auto;
+  background: #AF0F4B;
+  border: 3.0px solid #1c3c5b;
+  border-radius: 16px;
+  padding: 30px 30px;
+  max-height: 1100px;       
+}
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 3.0px solid #1c3c5b;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #1c3c5b;
+  font-weight: bold;
+  margin-bottom: 22px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.contador-numero {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #8a0505;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.titulo-ventas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.paginator-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.6rem;
+  color: #ffffff;
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border: 3.0px solid #1c3c5b;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+th {
+  color: #1c3c5b;
+  padding: 14px 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+td {
+  text-align: center;
+  color: #1c3c5b;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 10px 6px;
+  }
+}

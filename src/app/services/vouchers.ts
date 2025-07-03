@@ -22,4 +22,16 @@ export class Vouchers {
   delete(id: number) {
     return this.http.delete(`${this.url}/voucher/delete/${id}`);
   }
+
+  insert(so: vouchers) {
+    return this.http.post(`${this.url}/voucher/register`, so);
+  }
+
+  setList(listaNueva: vouchers[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
+  }
 }

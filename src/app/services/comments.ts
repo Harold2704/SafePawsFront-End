@@ -4,16 +4,16 @@ import { Subject } from 'rxjs';
 import { comments } from '../models/comments';
 import { HttpClient } from '@angular/common/http';
 
-const base_url = environment.base
+const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Comments {
   private url = `${base_url}/safepaws`;
   private listaCambio = new Subject<comments[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   list() {
     return this.http.get<comments[]>(`${this.url}/comments/list`);
@@ -21,5 +21,17 @@ export class Comments {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/comments/delete/${id}`);
+  }
+
+  insert(so: comments) {
+    return this.http.post(`${this.url}/comments/register`, so);
+  }
+
+  setList(listaNueva: comments[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
   }
 }

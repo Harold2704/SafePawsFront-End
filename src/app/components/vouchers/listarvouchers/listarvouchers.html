@@ -1,1 +1,63 @@
-<p>listarvouchers works!</p>
+<div class="container">
+    <div class="titulo-ventas">
+        <h1>Lista de Comprobantes</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 24px;">
+        <mat-form-field appearance="outline" style="width: 220px;">
+            <mat-label>Filtrar por Codigo</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese Codigo">
+        </mat-form-field>
+        <div class="contador">
+            <span>Total de registros:</span>
+            <span class="contador-numero">{{ dataSource.data.length }}</span>
+        </div>
+    </div>
+    <div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="c1">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.idVoucher}} </td>
+            </ng-container>
+
+            <!-- Codigo de Comprobante Column -->
+            <ng-container matColumnDef="c2">
+                <th mat-header-cell *matHeaderCellDef> Codigo de Comprobante </th>
+                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+            </ng-container>
+
+            <!-- Metodo de Pago Column -->
+            <ng-container matColumnDef="c3">
+                <th mat-header-cell *matHeaderCellDef> Metodo de Pago </th>
+                <td mat-cell *matCellDef="let element"> {{element.method}} </td>
+            </ng-container>
+
+            <!-- Nuevo Column -->
+             <ng-container matColumnDef="c4">
+                <th mat-header-cell *matHeaderCellDef> ¿Impreso? </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon style="color: green;" *ngIf="element.state === true">check_circle</mat-icon>
+                    <mat-icon style="color: red;" *ngIf="element.state === false">cancel</mat-icon>
+                </td>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon style="cursor: pointer; color: red;" (click)="eliminar(element.idVoucher)">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="paginator-container">
+            <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[4, 6, 8]"
+                showFirstLastButtons aria-label="Select page">
+            </mat-paginator>
+        </div>
+
+    </div>
+</div>

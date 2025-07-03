@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { shelters } from '../models/shelters';
 import { HttpClient } from '@angular/common/http';
 
-const base_url = environment.base
+const base_url = environment.base;
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +21,17 @@ export class Shelters {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/shelter/delete/${id}`);
+  }
+
+  insert(so: shelters) {
+    return this.http.post(`${this.url}/shelter/register`, so);
+  }
+
+  setList(listaNueva: shelters[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
   }
 }

@@ -1,1 +1,72 @@
-<p>listarcomments works!</p>
+<div class="container">
+    <div class="titulo-ventas">
+        <h1>Lista de Comentarios</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 24px;">
+        <mat-form-field appearance="outline" style="width: 220px;">
+            <mat-label>Filtrar por Calificación</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese Calificación (1-5)">
+        </mat-form-field>
+        <div class="contador">
+            <span>Total de registros:</span>
+            <span class="contador-numero">{{ dataSource.data.length }}</span>
+        </div>
+    </div>
+    <div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="c1">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.idComment}} </td>
+            </ng-container>
+
+            <!-- Descripción del Comentario Column -->
+            <ng-container matColumnDef="c2">
+                <th mat-header-cell *matHeaderCellDef> Descripción del Comentario </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <!-- Calificación Column -->
+            <ng-container matColumnDef="c3">
+                <th mat-header-cell *matHeaderCellDef> Calificación </th>
+                <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+            </ng-container>
+
+            <!-- Fecha de Publicación Column -->
+            <ng-container matColumnDef="c4">
+                <th mat-header-cell *matHeaderCellDef> Fecha de Publicación </th>
+                <td mat-cell *matCellDef="let element"> {{element.publicationDate}} </td>
+            </ng-container>
+
+            <!-- Nombre Refugio Column -->
+            <ng-container matColumnDef="c5">
+                <th mat-header-cell *matHeaderCellDef> Nombre Refugio </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameShelter}} </td>
+            </ng-container>
+
+            <!-- Nombre Cliente Column -->
+            <ng-container matColumnDef="c6">
+                <th mat-header-cell *matHeaderCellDef> Nombre Cliente </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameClient}} </td>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon style="cursor: pointer; color: red;" (click)="eliminar(element.idComment)">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="paginator-container">
+            <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[4, 6, 8]"
+                showFirstLastButtons aria-label="Select page">
+            </mat-paginator>
+        </div>
+
+    </div>
+</div>
