@@ -1,3 +1,5 @@
+import { users } from "./users"
+
 export class clients {
     idClient: number = 0
     name: string = ""
@@ -7,4 +9,5 @@ export class clients {
     email: string = ""
     number: string = ""
     adress: string = ""
+    user: users = new users()
 }

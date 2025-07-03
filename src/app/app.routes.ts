@@ -22,6 +22,17 @@ import { Vaccines } from './components/vaccines/vaccines';
 import { Listarvaccines } from './components/vaccines/listarvaccines/listarvaccines';
 import { Vouchers } from './components/vouchers/vouchers';
 import { Listarvouchers } from './components/vouchers/listarvouchers/listarvouchers';
+import { Creaeditaadoptions } from './components/adoptions/creaeditaadoptions/creaeditaadoptions';
+import { Creaeditaclients } from './components/clientes/creaeditaclients/creaeditaclients';
+import { Creaeditacomments } from './components/comments/creaeditacomments/creaeditacomments';
+import { Creaeditadonations } from './components/donations/creaeditadonations/creaeditadonations';
+import { Creaeditamedicalhistories } from './components/medicalhistories/creaeditamedicalhistories/creaeditamedicalhistories';
+import { Creaeditapets } from './components/pets/creaeditapets/creaeditapets';
+import { Creaeditaraces } from './components/races/creaeditaraces/creaeditaraces';
+import { Creaeditashelters } from './components/shelters/creaeditashelters/creaeditashelters';
+import { Creaeditavaccinepets } from './components/vaccinepets/creaeditavaccinepets/creaeditavaccinepets';
+import { Creaeditavaccines } from './components/vaccines/creaeditavaccines/creaeditavaccines';
+import { Creaeditavouchers } from './components/vouchers/creaeditavouchers/creaeditavouchers';
 
 export const routes: Routes = [
     { 
@@ -32,6 +43,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listaradoptions
+            },
+            {
+                path:'register', component:Creaeditaadoptions
             }
         ],
     },
@@ -40,6 +54,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarclients
+            },
+            {
+                path:'register', component:Creaeditaclients
             }
         ],
     },
@@ -48,6 +65,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarcomments
+            },
+            {
+                path:'register', component:Creaeditacomments
             }
         ],
     },
@@ -56,6 +76,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listardonations
+            },
+            {
+                path:'register', component:Creaeditadonations
             }
         ],
     },
@@ -64,6 +87,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarmedicalhistories
+            },
+            {
+                path:'register', component:Creaeditamedicalhistories
             }
         ],
     },
@@ -72,6 +98,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarpets
+            },
+            {
+                path:'register', component:Creaeditapets
             }
         ],
     },
@@ -80,6 +109,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarraces
+            },
+            {
+                path:'register', component:Creaeditaraces
             }
         ],
     },
@@ -88,6 +120,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarshelters
+            },
+            {
+                path:'register', component:Creaeditashelters
             }
         ],
     },
@@ -96,6 +131,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarvaccinepets
+            },
+            {
+                path:'register', component:Creaeditavaccinepets
             }
         ],
     },
@@ -104,6 +142,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarvaccines
+            },
+            {
+                path:'register', component:Creaeditavaccines
             }
         ],
     },
@@ -112,6 +153,9 @@ export const routes: Routes = [
         children:[
             {
                 path:'list', component:Listarvouchers
+            },
+            {
+                path:'register', component:Creaeditavouchers
             }
         ],
     },
