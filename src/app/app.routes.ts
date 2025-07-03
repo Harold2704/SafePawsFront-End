@@ -22,7 +22,7 @@ import { Vaccines } from './components/vaccines/vaccines';
 import { Listarvaccines } from './components/vaccines/listarvaccines/listarvaccines';
 import { Vouchers } from './components/vouchers/vouchers';
 import { Listarvouchers } from './components/vouchers/listarvouchers/listarvouchers';
- 
+
 export const routes: Routes = [
     { 
         path: '', component: Menu 

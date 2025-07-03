@@ -35,7 +35,6 @@
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 1px;
-  margin-left: 10px;
   margin-right: auto;
   font-family: 'Times New Roman', serif;
 }
@@ -60,4 +59,11 @@
 
 ::ng-deep .main-menu {
   margin-top: 15px !important;
+}
+
+.logo-img {
+  height: 32px;
+  margin-left: 10px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
