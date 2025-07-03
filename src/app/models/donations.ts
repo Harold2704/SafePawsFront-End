@@ -2,7 +2,6 @@ import { clients } from "./clients"
 import { shelters } from "./shelters"
 import { vouchers } from "./vouchers"
 
-
 export class donations {
     idDonation: number = 0
     donationDate: Date = new Date()

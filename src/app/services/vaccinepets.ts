@@ -22,4 +22,16 @@ export class Vaccinepets {
   delete(id: number) {
     return this.http.delete(`${this.url}/vaccinePet/delete/${id}`);
   }
+
+  insert(so: vaccinepets) {
+    return this.http.post(`${this.url}/vaccinePet/register`, so);
+  }
+
+  setList(listaNueva: vaccinepets[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
+  }
 }

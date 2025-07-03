@@ -1,1 +1,75 @@
-<p>listaradoptions works!</p>
+<div class="container">
+    <div class="titulo-ventas">
+        <h1>Lista de Adopciones</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 24px;">
+        <mat-form-field appearance="outline" style="width: 220px;">
+            <mat-label>Filtrar por Nombre</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese Nombre">
+        </mat-form-field>
+        <div class="contador">
+            <span>Total de registros:</span>
+            <span class="contador-numero">{{ dataSource.data.length }}</span>
+        </div>
+    </div>
+    <div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="c1">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.idAdoption}} </td>
+            </ng-container>
+
+            <!-- Observaciones Column -->
+            <ng-container matColumnDef="c2">
+                <th mat-header-cell *matHeaderCellDef> Observaciones </th>
+                <td mat-cell *matCellDef="let element"> {{element.observation}} </td>
+            </ng-container>
+
+            <!-- Fecha de Adopción Column -->
+            <ng-container matColumnDef="c3">
+                <th mat-header-cell *matHeaderCellDef> Fecha de Adopción </th>
+                <td mat-cell *matCellDef="let element"> {{element.dateAdoption}} </td>
+            </ng-container>
+
+            <!-- Nuevo Column -->
+             <ng-container matColumnDef="c4">
+                <th mat-header-cell *matHeaderCellDef> ¿Aprobado? </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon style="color: green;" *ngIf="element.status === true">check_circle</mat-icon>
+                    <mat-icon style="color: red;" *ngIf="element.status === false">cancel</mat-icon>
+                </td>
+            </ng-container>
+
+            <!-- Nombre del Cliente Column -->
+            <ng-container matColumnDef="c5">
+                <th mat-header-cell *matHeaderCellDef> Nombre del Cliente </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameClient}} </td>
+            </ng-container>
+
+            <!-- Nombre de la Mascota Column -->
+            <ng-container matColumnDef="c6">
+                <th mat-header-cell *matHeaderCellDef> Nombre de la Mascota </th>
+                <td mat-cell *matCellDef="let element"> {{element.namePet}} </td>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon style="cursor: pointer; color: red;" (click)="eliminar(element.idAdoption)">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="paginator-container">
+            <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[4, 6, 8]"
+                showFirstLastButtons aria-label="Select page">
+            </mat-paginator>
+        </div>
+
+    </div>
+</div>

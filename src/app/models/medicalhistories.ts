@@ -7,4 +7,4 @@ export class medicalhistories {
     veterinarian: string = ""
     pet: pets = new pets()
     namePet: string = ""
-}
+} 

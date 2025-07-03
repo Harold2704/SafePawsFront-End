@@ -10,4 +10,4 @@ export class adoptions {
     nameClient: string = ""
     pet: pets = new pets()
     namePet: string = ""
-}
+} 
