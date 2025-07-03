@@ -1,13 +1,13 @@
 .main-bg {
-  min-height: 100vh;
+  min-height: 65vh;
   background-color: #E9F3EF;
   padding-top: 70px;
 }
 
 .custom-toolbar {
-  background: #2171C2;
+  background: #1c3c5b;
   color: #fff;
-  height: 70px;
+  height: 90px;
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -58,12 +58,118 @@
 }
 
 ::ng-deep .main-menu {
-  margin-top: 15px !important;
+  margin-top: 25px !important;
 }
 
 .logo-img {
-  height: 32px;
+  height: 62px;
   margin-left: 10px;
-  margin-right: 5px;
+  margin-right: 8px;
   vertical-align: middle;
+}
+
+.footer {
+  background-color: #1c3c5b;
+  color: white;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0;
+  width: 100%;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 10px;
+  text-align: left;
+  font-family: 'Times New Roman', serif;
+  text-align: center;
+}
+
+.footer-logo {
+  width: 165px;
+  height: middle;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'Times New Roman', serif;
+  text-align: center;
+}
+
+.footer-links li {
+  margin: 5px 0;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+
+.social-icons img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+  font-family: 'Times New Roman', serif;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.footer-section h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-section .footer-links {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 20px;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
 }
