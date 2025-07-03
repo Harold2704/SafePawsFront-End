@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listardonations.html',
-  styleUrl: './listardonations.css'
+  styleUrl: './listardonations.css',
 })
 export class Listardonations implements OnInit {
   dataSource: MatTableDataSource<donations> = new MatTableDataSource();
@@ -45,16 +45,24 @@ export class Listardonations implements OnInit {
     this.dS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (data: donations, filter: string) => {
-        return data.nameClient?.toLowerCase().includes(filter.trim().toLowerCase()) ||
-               data.nameShelter?.toLowerCase().includes(filter.trim().toLowerCase());
+        return (
+          data.nameClient
+            ?.toLowerCase()
+            .includes(filter.trim().toLowerCase()) ||
+          data.nameShelter?.toLowerCase().includes(filter.trim().toLowerCase())
+        );
       };
       this.dataSource.paginator = this.paginator;
     });
     this.dS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (data: donations, filter: string) => {
-        return data.nameClient?.toLowerCase().includes(filter.trim().toLowerCase()) ||
-               data.nameShelter?.toLowerCase().includes(filter.trim().toLowerCase());
+        return (
+          data.nameClient
+            ?.toLowerCase()
+            .includes(filter.trim().toLowerCase()) ||
+          data.nameShelter?.toLowerCase().includes(filter.trim().toLowerCase())
+        );
       };
       this.dataSource.paginator = this.paginator;
     });
@@ -76,6 +84,13 @@ export class Listardonations implements OnInit {
           this.dS.setList(data);
         });
         this.snackBar.open('Eliminación exitosa', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

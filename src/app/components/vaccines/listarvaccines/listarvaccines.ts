@@ -21,16 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarvaccines.html',
-  styleUrl: './listarvaccines.css'
+  styleUrl: './listarvaccines.css',
 })
 export class Listarvaccines implements OnInit {
   dataSource: MatTableDataSource<vaccines> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'acciones'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -69,6 +64,13 @@ export class Listarvaccines implements OnInit {
           this.vS.setList(data);
         });
         this.snackBar.open('Eliminación exitosa', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

@@ -21,17 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarvouchers.html',
-  styleUrl: './listarvouchers.css'
+  styleUrl: './listarvouchers.css',
 })
 export class Listarvouchers implements OnInit {
   dataSource: MatTableDataSource<vouchers> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'acciones'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -75,7 +69,13 @@ export class Listarvouchers implements OnInit {
           verticalPosition: 'bottom',
         });
       },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
 }
- 

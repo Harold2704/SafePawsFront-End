@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarpets.html',
-  styleUrl: './listarpets.css'
+  styleUrl: './listarpets.css',
 })
 export class Listarpets implements OnInit {
   dataSource: MatTableDataSource<pets> = new MatTableDataSource();
@@ -80,7 +80,13 @@ export class Listarpets implements OnInit {
           verticalPosition: 'bottom',
         });
       },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
 }
- 

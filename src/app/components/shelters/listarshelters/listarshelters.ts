@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarshelters.html',
-  styleUrl: './listarshelters.css'
+  styleUrl: './listarshelters.css',
 })
 export class Listarshelters implements OnInit {
   dataSource: MatTableDataSource<shelters> = new MatTableDataSource();
@@ -78,6 +78,13 @@ export class Listarshelters implements OnInit {
           verticalPosition: 'bottom',
         });
       },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
-} 
+}

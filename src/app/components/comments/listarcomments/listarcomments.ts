@@ -21,19 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarcomments.html',
-  styleUrl: './listarcomments.css'
+  styleUrl: './listarcomments.css',
 })
 export class Listarcomments implements OnInit {
   dataSource: MatTableDataSource<comments> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'c5',
-    'c6',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'acciones'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,14 +35,20 @@ export class Listarcomments implements OnInit {
     this.cS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (data: comments, filter: string) => {
-        return data.qualification?.toString().toLowerCase().includes(filter.trim().toLowerCase());
+        return data.qualification
+          ?.toString()
+          .toLowerCase()
+          .includes(filter.trim().toLowerCase());
       };
       this.dataSource.paginator = this.paginator;
     });
     this.cS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (data: comments, filter: string) => {
-        return data.qualification?.toString().toLowerCase().includes(filter.trim().toLowerCase());
+        return data.qualification
+          ?.toString()
+          .toLowerCase()
+          .includes(filter.trim().toLowerCase());
       };
       this.dataSource.paginator = this.paginator;
     });
@@ -72,6 +70,13 @@ export class Listarcomments implements OnInit {
           this.cS.setList(data);
         });
         this.snackBar.open('Eliminación exitosa', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

@@ -21,18 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarmedicalhistories.html',
-  styleUrl: './listarmedicalhistories.css'
+  styleUrl: './listarmedicalhistories.css',
 })
 export class Listarmedicalhistories implements OnInit {
   dataSource: MatTableDataSource<medicalhistories> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'c5',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'acciones'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -41,15 +34,25 @@ export class Listarmedicalhistories implements OnInit {
   ngOnInit(): void {
     this.mS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.filterPredicate = (data: medicalhistories, filter: string) => {
-        return data.veterinarian?.toLowerCase().includes(filter.trim().toLowerCase());
+      this.dataSource.filterPredicate = (
+        data: medicalhistories,
+        filter: string
+      ) => {
+        return data.veterinarian
+          ?.toLowerCase()
+          .includes(filter.trim().toLowerCase());
       };
       this.dataSource.paginator = this.paginator;
     });
     this.mS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.filterPredicate = (data: medicalhistories, filter: string) => {
-        return data.veterinarian?.toLowerCase().includes(filter.trim().toLowerCase());
+      this.dataSource.filterPredicate = (
+        data: medicalhistories,
+        filter: string
+      ) => {
+        return data.veterinarian
+          ?.toLowerCase()
+          .includes(filter.trim().toLowerCase());
       };
       this.dataSource.paginator = this.paginator;
     });
@@ -76,7 +79,13 @@ export class Listarmedicalhistories implements OnInit {
           verticalPosition: 'bottom',
         });
       },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
 }
- 

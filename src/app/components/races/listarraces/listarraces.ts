@@ -8,7 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { races } from '../../../models/races';
 import { Races } from '../../../services/races';
 import { MatSnackBar } from '@angular/material/snack-bar';
- 
+
 @Component({
   selector: 'app-listarraces',
   standalone: true,
@@ -21,16 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarraces.html',
-  styleUrl: './listarraces.css'
+  styleUrl: './listarraces.css',
 })
 export class Listarraces implements OnInit {
   dataSource: MatTableDataSource<races> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'acciones'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -69,6 +64,13 @@ export class Listarraces implements OnInit {
           this.rS.setList(data);
         });
         this.snackBar.open('Eliminación exitosa', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

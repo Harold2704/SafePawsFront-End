@@ -21,46 +21,40 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
   ],
   templateUrl: './listarvaccinepets.html',
-  styleUrl: './listarvaccinepets.css'
+  styleUrl: './listarvaccinepets.css',
 })
 export class Listarvaccinepets implements OnInit {
   dataSource: MatTableDataSource<vaccinepets> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'acciones'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private vS: Vaccinepets, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
-  this.vS.list().subscribe((data) => {
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.filterPredicate = (data: vaccinepets, filter: string) => {
-      const filterText = filter.trim().toLowerCase();
-      return (
-        data.nameVaccine?.toLowerCase().includes(filterText) ||
-        data.namePet?.toLowerCase().includes(filterText)
-      );
-    };
-    this.dataSource.paginator = this.paginator;
-  });
-  this.vS.getList().subscribe((data) => {
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.filterPredicate = (data: vaccinepets, filter: string) => {
-      const filterText = filter.trim().toLowerCase();
-      return (
-        data.nameVaccine?.toLowerCase().includes(filterText) ||
-        data.namePet?.toLowerCase().includes(filterText)
-      );
-    };
-    this.dataSource.paginator = this.paginator;
-  });
-}
+    this.vS.list().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.filterPredicate = (data: vaccinepets, filter: string) => {
+        const filterText = filter.trim().toLowerCase();
+        return (
+          data.nameVaccine?.toLowerCase().includes(filterText) ||
+          data.namePet?.toLowerCase().includes(filterText)
+        );
+      };
+      this.dataSource.paginator = this.paginator;
+    });
+    this.vS.getList().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.filterPredicate = (data: vaccinepets, filter: string) => {
+        const filterText = filter.trim().toLowerCase();
+        return (
+          data.nameVaccine?.toLowerCase().includes(filterText) ||
+          data.namePet?.toLowerCase().includes(filterText)
+        );
+      };
+      this.dataSource.paginator = this.paginator;
+    });
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -83,7 +77,13 @@ export class Listarvaccinepets implements OnInit {
           verticalPosition: 'bottom',
         });
       },
+      error: () => {
+        this.snackBar.open('No se puede realizar la eliminación', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
 }
- 
