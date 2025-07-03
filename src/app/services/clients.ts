@@ -22,4 +22,16 @@ export class Clients {
   delete(id: number) {
     return this.http.delete(`${this.url}/client/delete/${id}`);
   }
+
+  insert(so: clients) {
+    return this.http.post(`${this.url}/client/register`, so);
+  }
+
+  setList(listaNueva: clients[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
+  }
 }
