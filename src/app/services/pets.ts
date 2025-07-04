@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import { pets } from '../models/pets';
 import { HttpClient } from '@angular/common/http';
+import { shelters } from '../models/shelters';
+import { races } from '../models/races';
 
 const base_url = environment.base;
 
@@ -33,5 +35,13 @@ export class Pets {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  getShelters() {
+    return this.http.get<shelters[]>(`${this.url}/shelter/list`);
+  }
+
+  getRaces() {
+    return this.http.get<races[]>(`${this.url}/race/list`);
   }
 }

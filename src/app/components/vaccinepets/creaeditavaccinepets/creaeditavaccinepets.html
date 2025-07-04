@@ -1,1 +1,47 @@
-<p>creaeditavaccinepets works!</p>
+<div class="card-container">
+    <h1>Registro de Vacuna Mascota</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Fecha de Aplicación</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Ej. 27-04-2024" formControlName="hdateApplication">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('hdateApplication')?.hasError('required')">
+                La fecha es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdateApplication')?.hasError('fechaMenorHoy')">
+                La fecha no puede ser mayor a hoy.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Vacuna</mat-label>
+            <mat-select formControlName="hidVaccine">
+                <mat-option *ngFor="let v of vaccines" [value]="v.idVaccine">{{v.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidVaccine')?.hasError('required')">
+                Seleccione una vacuna.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Mascota</mat-label>
+            <mat-select formControlName="hidPet">
+                <mat-option *ngFor="let p of pets" [value]="p.idPet">{{p.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidPet')?.hasError('required')">
+                Seleccione una mascota.
+            </mat-error>
+        </mat-form-field>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn"
+                (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

@@ -1,1 +1,62 @@
-<p>creaeditaadoptions works!</p>
+<div class="card-container">
+    <h1>Registro de Adopciones</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Observación</mat-label>
+            <textarea matInput placeholder="Ej. Dejo en claro que..." formControlName="hobservation" rows="3"></textarea>
+            <mat-error *ngIf="form.get('hobservation')?.hasError('required')">
+                La observación es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hobservation')?.hasError('minlength')">
+                La observación debe tener al menos 10 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Fecha de Adopción</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Ej. 27-04-2024" formControlName="hdateAdoption">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('hdateAdoption')?.hasError('required')">
+                La fecha es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdateAdoption')?.hasError('fechaMenorHoy')">
+                La fecha no puede ser mayor a hoy.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="hidClient">
+                <mat-option *ngFor="let cl of clients" [value]="cl.idClient">{{cl.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidClient')?.hasError('required')">
+                Seleccione un cliente.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Mascota</mat-label>
+            <mat-select formControlName="hidPet">
+                <mat-option *ngFor="let p of pets" [value]="p.idPet">{{p.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidPet')?.hasError('required')">
+                Seleccione una mascota.
+            </mat-error>
+        </mat-form-field>
+
+        <section class="example-section">
+            <mat-checkbox class="example-margin" formControlName="hstatus" color="primary"></mat-checkbox>
+            <label>¿Aprobado?</label>
+        </section>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

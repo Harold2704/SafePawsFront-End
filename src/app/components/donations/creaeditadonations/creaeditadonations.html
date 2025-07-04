@@ -1,1 +1,90 @@
-<p>creaeditadonations works!</p>
+<div class="card-container">
+    <h1>Registro de Donaciones</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Fecha Donación</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Ej. 27-04-2024" formControlName="hdonationDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('hdonationDate')?.hasError('required')">
+                La fecha es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdonationDate')?.hasError('fechaMenorHoy')">
+                La fecha no puede ser mayor a hoy.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo donación</mat-label>
+            <mat-select formControlName="htype">
+                @for (food of listtype; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="form.get('htype')?.hasError('required')">
+                Seleccione un tipo de donación.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Monton aportado</mat-label>
+            <input matInput type="number" placeholder="Ej. 20" formControlName="hamount">
+            <mat-error *ngIf="form.get('hamount')?.hasError('required')">
+                El monto es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hamount')?.hasError('min')">
+                El monto debe ser mayor o igual a 0.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Detalles Donación</mat-label>
+            <textarea matInput placeholder="Ej. La donación se destinará a..." formControlName="hdetail" rows="3"></textarea>
+            <mat-error *ngIf="form.get('hdetail')?.hasError('required')">
+                Los detalles son obligatorios.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdetail')?.hasError('minlength')">
+                Los detalles deben tener al menos 10 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Refugio</mat-label>
+            <mat-select formControlName="hidShelter">
+                <mat-option *ngFor="let sh of shelters" [value]="sh.idShelter">{{sh.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidShelter')?.hasError('required')">
+                Seleccione un refugio.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="hidClient">
+                <mat-option *ngFor="let cl of clients" [value]="cl.idClient">{{cl.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidClient')?.hasError('required')">
+                Seleccione un cliente.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Comprobante</mat-label>
+            <mat-select formControlName="hidVoucher">
+                <mat-option *ngFor="let v of vouchers" [value]="v.idVoucher">{{v.codeVoucher}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidVoucher')?.hasError('required')">
+                Seleccione un comprobante.
+            </mat-error>
+        </mat-form-field>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

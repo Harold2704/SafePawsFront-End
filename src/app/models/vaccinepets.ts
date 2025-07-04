@@ -8,4 +8,4 @@ export class vaccinepets {
     nameVaccine: string = ""
     idPet: pets = new pets()
     namePet: string = ""
-} 
+}

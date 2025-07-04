@@ -1,1 +1,60 @@
-<p>creaeditamedicalhistories works!</p>
+<div class="card-container">
+    <h1>Registro de Historial Médico</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Fecha de Historia Médica</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Ej. 27-04-2024" formControlName="hdateMedicalHistory">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('hdateMedicalHistory')?.hasError('required')">
+                La fecha es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdateMedicalHistory')?.hasError('fechaMenorHoy')">
+                La fecha no puede ser mayor a hoy.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Diagnostico</mat-label>
+            <textarea matInput placeholder="Ej. La mascota tiene..." formControlName="hdiagnostic"
+                rows="3"></textarea>
+            <mat-error *ngIf="form.get('hdiagnostic')?.hasError('required')">
+                El diagnostico es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdiagnostic')?.hasError('minlength')">
+                El diagnostico debe tener al menos 10 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre del veterinario</mat-label>
+            <input matInput placeholder="Ej. Dr. Jose" formControlName="hveterinarian">
+            <mat-error *ngIf="form.get('hveterinarian')?.hasError('required')">
+                El nombre del veterinario es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hveterinarian')?.hasError('minlength')">
+                El nombre del veterinario debe tener al menos 4 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Mascota</mat-label>
+            <mat-select formControlName="hidPet">
+                <mat-option *ngFor="let p of pets" [value]="p.idPet">{{p.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidPet')?.hasError('required')">
+                Seleccione una mascota.
+            </mat-error>
+        </mat-form-field>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn"
+                (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

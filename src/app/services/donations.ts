@@ -3,6 +3,9 @@ import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import { donations } from '../models/donations';
 import { HttpClient } from '@angular/common/http';
+import { shelters } from '../models/shelters';
+import { clients } from '../models/clients';
+import { vouchers } from '../models/vouchers';
 
 const base_url = environment.base;
 
@@ -33,5 +36,17 @@ export class Donations {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  getShelters() {
+    return this.http.get<shelters[]>(`${this.url}/shelter/list`);
+  }
+
+  getClients() {
+    return this.http.get<clients[]>(`${this.url}/client/list`);
+  }
+
+  getVouchers() {
+    return this.http.get<vouchers[]>(`${this.url}/voucher/list`);
   }
 }

@@ -1,1 +1,101 @@
-<p>creaeditapets works!</p>
+<div class="card-container">
+    <h1>Registro de Mascotas</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre de la mascota</mat-label>
+            <input matInput placeholder="Ej. Rocky" formControlName="hname">
+            <mat-error *ngIf="form.get('hname')?.hasError('required')">
+                El nombre de la mascota es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hname')?.hasError('minlength')">
+                El nombre de la mascota debe tener al menos 4 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Sexo de la mascota</mat-label>
+            <mat-select formControlName="hsex">
+                @for (food of listsex; track food) {
+                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="form.get('hsex')?.hasError('required')">
+                Seleccione un sexo.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Ej. 27-04-2024" formControlName="hbirthdate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('hbirthdate')?.hasError('required')">
+                La fecha es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hbirthdate')?.hasError('fechaMenorHoy')">
+                La fecha no puede ser mayor a hoy.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Peso (kg)</mat-label>
+            <input matInput placeholder="Ej. 10" type="number" formControlName="hweight">
+            <mat-error *ngIf="form.get('hweight')?.hasError('required')">
+                El peso es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hweight')?.hasError('min')">
+                El peso debe ser mayor o igual a 5 kg.
+            </mat-error>
+            <mat-error *ngIf="form.get('hweight')?.hasError('max')">
+                El peso debe ser menor o igual a 60 kg.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Ej. Rocky es un perro..." formControlName="hdescription"
+                rows="3"></textarea>
+            <mat-error *ngIf="form.get('hdescription')?.hasError('required')">
+                La descripcion es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdescription')?.hasError('minlength')">
+                La descripcion debe tener al menos 10 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Refugio</mat-label>
+            <mat-select formControlName="hidShelter">
+                <mat-option *ngFor="let sh of shelters" [value]="sh.idShelter">{{sh.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidShelter')?.hasError('required')">
+                Seleccione un refugio.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Raza</mat-label>
+            <mat-select formControlName="hidRace">
+                <mat-option *ngFor="let r of races" [value]="r.idRace">{{r.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidRace')?.hasError('required')">
+                Seleccione una raza.
+            </mat-error>
+        </mat-form-field>
+
+        <section class="example-section">
+            <mat-checkbox class="example-margin" formControlName="hstatus" color="primary"></mat-checkbox>
+            <label>¿Adoptado?</label>
+        </section>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn"
+                (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>
