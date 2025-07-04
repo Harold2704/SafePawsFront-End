@@ -6,8 +6,8 @@ export class adoptions {
     observation: string = ""
     dateAdoption: Date = new Date()
     status: boolean = false
-    client: clients = new clients()
+    idClient: clients = new clients()
     nameClient: string = ""
-    pet: pets = new pets()
+    idPet: pets = new pets()
     namePet: string = ""
 } 

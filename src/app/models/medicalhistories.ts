@@ -5,6 +5,6 @@ export class medicalhistories {
     dateMedicalHistory: Date = new Date()
     diagnostic: string = ""
     veterinarian: string = ""
-    pet: pets = new pets()
+    idPet: pets = new pets()
     namePet: string = ""
 } 

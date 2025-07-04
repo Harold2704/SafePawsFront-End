@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import { comments } from '../models/comments';
 import { HttpClient } from '@angular/common/http';
+import { shelters } from '../models/shelters';
+import { clients } from '../models/clients';
 
 const base_url = environment.base;
 
@@ -33,5 +35,13 @@ export class Comments {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  getShelters() {
+    return this.http.get<shelters[]>(`${this.url}/shelter/list`);
+  }
+
+  getClients() {
+    return this.http.get<clients[]>(`${this.url}/client/list`);
   }
 }

@@ -8,10 +8,10 @@ export class donations {
     type: string = ""
     amount: number = 0
     detail: string = ""
-    client: clients = new clients()
+    idClient: clients = new clients()
     nameClient: string = ""
-    shelter: shelters = new shelters()
+    idShelter: shelters = new shelters()
     nameShelter: string = ""
-    voucher: vouchers = new vouchers()
+    idVoucher: vouchers = new vouchers()
     codeVoucher: string = ""
 }

@@ -35,14 +35,14 @@ export class Listarvouchers implements OnInit {
     this.vS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (data: vouchers, filter: string) => {
-        return data.code?.toLowerCase().includes(filter.trim().toLowerCase());
+        return data.codeVoucher?.toLowerCase().includes(filter.trim().toLowerCase());
       };
       this.dataSource.paginator = this.paginator;
     });
     this.vS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (data: vouchers, filter: string) => {
-        return data.code?.toLowerCase().includes(filter.trim().toLowerCase());
+        return data.codeVoucher?.toLowerCase().includes(filter.trim().toLowerCase());
       };
       this.dataSource.paginator = this.paginator;
     });

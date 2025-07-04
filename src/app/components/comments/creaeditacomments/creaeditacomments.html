@@ -1,1 +1,69 @@
-<p>creaeditacomments works!</p>
+<div class="card-container">
+    <h1>Registro de Comentarios</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Ej. Opino que este refugio..." formControlName="hdescription" rows="3"></textarea>
+            <mat-error *ngIf="form.get('hdescription')?.hasError('required')">
+                La descripcion es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdescription')?.hasError('minlength')">
+                La descripcion debe tener al menos 8 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Calificación</mat-label>
+            <mat-select formControlName="hqualification">
+                @for (food of listrating; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="form.get('hqualification')?.hasError('required')">
+                Seleccione una calificación.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Fecha de Publicación</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Ej. 27-04-2024" formControlName="hpublicationDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('hpublicationDate')?.hasError('required')">
+                La fecha es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hpublicationDate')?.hasError('fechaMenorHoy')">
+                La fecha no puede ser mayor a hoy.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Refugio</mat-label>
+            <mat-select formControlName="hidShelter">
+                <mat-option *ngFor="let sh of shelters" [value]="sh.idShelter">{{sh.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidShelter')?.hasError('required')">
+                Seleccione un refugio.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="hidClient">
+                <mat-option *ngFor="let cl of clients" [value]="cl.idClient">{{cl.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidClient')?.hasError('required')">
+                Seleccione un cliente.
+            </mat-error>
+        </mat-form-field>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

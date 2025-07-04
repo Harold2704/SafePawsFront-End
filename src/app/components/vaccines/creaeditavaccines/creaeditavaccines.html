@@ -1,1 +1,35 @@
-<p>creaeditavaccines works!</p>
+<div class="card-container">
+    <h1>Registro de Vacunas</h1>
+    
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre de la vacuna</mat-label>
+            <input matInput placeholder="Ej. Rabia" formControlName="hname">
+            <mat-error *ngIf="form.get('hname')?.hasError('required')">
+                El nombre de la vacuna es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hname')?.hasError('minlength')">
+                El nombre de la vacuna debe tener al menos 4 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Ej. Esta vacuna previene enfermedades..." formControlName="hdescription" rows="3"></textarea>
+            <mat-error *ngIf="form.get('hdescription')?.hasError('required')">
+                La descripcion es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdescription')?.hasError('minlength')">
+                La descripcion debe tener al menos 10 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

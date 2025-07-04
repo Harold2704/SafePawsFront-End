@@ -1,3 +1,5 @@
+import { users } from "./users"
+
 export class shelters {
     idShelter: number = 0
     name: string = ""
@@ -6,4 +8,5 @@ export class shelters {
     adress: string = ""
     openingDate: Date = new Date()
     ability: number = 0
+    idUser: users = new users()
 }

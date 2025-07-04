@@ -6,8 +6,8 @@ export class comments {
     description: string = ""
     qualification: number = 0
     publicationDate: Date = new Date()
-    shelter: shelters = new shelters()
+    idShelter: shelters = new shelters()
     nameShelter: string = ""
-    client: clients = new clients()
+    idClient: clients = new clients()
     nameClient: string = ""
 }

@@ -4,8 +4,8 @@ import { vaccines } from "./vaccines"
 export class vaccinepets {
     idVaccinePet: number = 0
     dateApplication: Date = new Date()
-    vaccine: vaccines = new vaccines()
+    idVaccine: vaccines = new vaccines()
     nameVaccine: string = ""
-    pet: pets = new pets()
+    idPet: pets = new pets()
     namePet: string = ""
 } 

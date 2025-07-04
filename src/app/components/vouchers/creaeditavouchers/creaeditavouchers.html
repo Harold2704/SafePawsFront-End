@@ -1,1 +1,40 @@
-<p>creaeditavouchers works!</p>
+<div class="card-container">
+    <h1>Registro de Comprobantes</h1>
+    
+    <form [formGroup]="form" (submit)="aceptar()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Código del comprobante</mat-label>
+            <input matInput placeholder="Ej. ABC123" formControlName="hcodeVoucher">
+            <mat-error *ngIf="form.get('hcodeVoucher')?.hasError('required')">
+                El código del comprobante es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hcodeVoucher')?.hasError('minlength')">
+                El código del comprobante debe tener al menos 8 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Metodo de pago</mat-label>
+            <mat-select formControlName="hmethod">
+                @for (payment of listmethod; track payment) {
+                    <mat-option [value]="payment.value">{{payment.viewValue}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="form.get('hmethod')?.hasError('required')">
+                Seleccione un método de pago.
+            </mat-error>
+        </mat-form-field>
+
+        <section class="example-section">
+            <mat-checkbox class="example-margin" formControlName="hstate" color="primary"></mat-checkbox>
+            <label>¿Impreso?</label>
+        </section>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

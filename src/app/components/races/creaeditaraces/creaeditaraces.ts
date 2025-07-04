@@ -1,11 +1,82 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { races } from '../../../models/races';
+import { Races } from '../../../services/races';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-creaeditaraces',
-  imports: [],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './creaeditaraces.html',
   styleUrl: './creaeditaraces.css'
 })
-export class Creaeditaraces {
+export class Creaeditaraces implements OnInit {
+  form: FormGroup = new FormGroup({});
+  races: races = new races();
 
+  listspecies: { value: string; viewValue: string }[] = [
+    { value: 'Perro', viewValue: 'Perro' },
+    { value: 'Gato', viewValue: 'Gato' },
+  ];
+
+  constructor(
+    private rS: Races,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      hname: ['', [Validators.required, Validators.minLength(4)]],
+      hspecies: ['', [Validators.required]],
+    });
+  }
+
+  aceptar(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.races.name = this.form.value.hname;
+    this.races.species = this.form.value.hspecies;
+    this.rS.insert(this.races).subscribe({
+      next: () => {
+        this.rS.list().subscribe((d) => {
+          this.rS.setList(d);
+        });
+        this.snackBar.open('Transacción registrada exitosamente', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.router.navigate(['/race/list']);
+      },
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/race/list']);
+  }
 }

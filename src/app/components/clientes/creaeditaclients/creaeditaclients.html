@@ -1,1 +1,101 @@
-<p>creaeditaclients works!</p>
+<div class="card-container">
+    <h1>Registro de Clientes</h1>
+
+    <form [formGroup]="form" (submit)="aceptar()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre cliente</mat-label>
+            <input matInput placeholder="Ej. Harold" formControlName="hname">
+            <mat-error *ngIf="form.get('hname')?.hasError('required')">
+                El nombre es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hname')?.hasError('minlength')">
+                El nombre debe tener al menos 4 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Apellido cliente</mat-label>
+            <input matInput placeholder="Ej. Alvarado" formControlName="hlastName">
+            <mat-error *ngIf="form.get('hlastName')?.hasError('required')">
+                El apellido es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hlastName')?.hasError('minlength')">
+                El apellido debe tener al menos 4 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>DNI cliente</mat-label>
+            <input matInput placeholder="Ej. 73812491" formControlName="hdni">
+            <mat-error *ngIf="form.get('hdni')?.hasError('required')">
+                El DNI es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hdni')?.hasError('minlength')">
+                El DNI debe tener 8 caracteres y deben ser números.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo de genero</mat-label>
+            <mat-select formControlName="hgender">
+                @for (food of listgender; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                }
+            </mat-select>
+            <mat-error *ngIf="form.get('hgender')?.hasError('required')">
+                Seleccione un género.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput placeholder="Ej. ejemplo@correo.com" formControlName="hemail">
+            <mat-error *ngIf="form.get('hemail')?.hasError('required')">
+                El correo electrónico es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hemail')?.hasError('email')">
+                El correo electrónico debe ser válido y mayor a 11 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Telefono cliente</mat-label>
+            <input matInput placeholder="Ej. 987654321" formControlName="hnumber">
+            <mat-error *ngIf="form.get('hnumber')?.hasError('required')">
+                El teléfono es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="form.get('hnumber')?.hasError('minlength')">
+                El teléfono debe tener 9 caracteres y deben ser números.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Direccion cliente</mat-label>
+            <input matInput placeholder="Ej. Av. Siempre Viva 742" formControlName="hadress">
+            <mat-error *ngIf="form.get('hadress')?.hasError('required')">
+                La dirección es obligatoria.
+            </mat-error>
+            <mat-error *ngIf="form.get('hadress')?.hasError('minlength')">
+                La dirección debe tener al menos 11 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Usuario</mat-label>
+            <mat-select formControlName="hidUser">
+                <mat-option *ngFor="let us of users" [value]="us.id">{{us.username}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('hidUser')?.hasError('required')">
+                Seleccione un usuario.
+            </mat-error>
+        </mat-form-field>
+
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="submit" color="primary" class="registrar-btn">Registrar</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <button mat-raised-button type="button" color="warn" class="cancelar-btn" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

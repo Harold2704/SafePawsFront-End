@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import { clients } from '../models/clients';
 import { HttpClient } from '@angular/common/http';
+import { users } from '../models/users';
 
 const base_url = environment.base
 
@@ -33,5 +34,9 @@ export class Clients {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  getUsers() {
+    return this.http.get<users[]>(`${this.url}/users/list`);
   }
 }

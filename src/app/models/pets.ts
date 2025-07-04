@@ -9,8 +9,8 @@ export class pets {
     weight: number = 0
     description: string = ""
     status: boolean = false
-    shelter: shelters = new shelters()
+    idShelter: shelters = new shelters()
     nameShelter: string = ""
-    race: races = new races()
+    idRace: races = new races()
     nameRace: string = ""
 }

@@ -1,6 +1,6 @@
 export class vouchers {
     idVoucher: number = 0
-    code: string = ""
+    codeVoucher: string = ""
     method: string = ""
     state: boolean = false
 } 

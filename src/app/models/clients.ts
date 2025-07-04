@@ -9,5 +9,5 @@ export class clients {
     email: string = ""
     number: string = ""
     adress: string = ""
-    user: users = new users()
+    idUser: users = new users()
 }
