@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -31,7 +39,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ReactiveFormsModule,
   ],
   templateUrl: './creaeditacomments.html',
-  styleUrl: './creaeditacomments.css'
+  styleUrl: './creaeditacomments.css',
 })
 export class Creaeditacomments implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -58,7 +66,10 @@ export class Creaeditacomments implements OnInit {
     this.form = this.formBuilder.group({
       hdescription: ['', [Validators.required, Validators.minLength(8)]],
       hqualification: ['', [Validators.required]],
-      hpublicationDate: ['', [Validators.required, this.fechaNoMayorHoyValidator()]],
+      hpublicationDate: [
+        '',
+        [Validators.required, this.fechaNoMayorHoyValidator()],
+      ],
       hidShelter: ['', [Validators.required]],
       hidClient: ['', [Validators.required]],
     });
