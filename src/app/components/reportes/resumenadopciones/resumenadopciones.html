@@ -1,0 +1,10 @@
+<div class="chart-container">
+  <div class="chart-title">Resumen de Adopciones por Albergue</div>
+  <div *ngIf="loading" class="loading-message">
+    Cargando datos...
+  </div>
+  <div *ngIf="!loading && resumen.length === 0" class="no-data-message">
+    No hay datos para mostrar el reporte.
+  </div>
+  <canvas #barCanvas [hidden]="loading || resumen.length === 0"></canvas>
+</div>

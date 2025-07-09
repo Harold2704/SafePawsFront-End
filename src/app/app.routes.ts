@@ -33,6 +33,13 @@ import { Creaeditashelters } from './components/shelters/creaeditashelters/creae
 import { Creaeditavaccinepets } from './components/vaccinepets/creaeditavaccinepets/creaeditavaccinepets';
 import { Creaeditavaccines } from './components/vaccines/creaeditavaccines/creaeditavaccines';
 import { Creaeditavouchers } from './components/vouchers/creaeditavouchers/creaeditavouchers';
+import { Reportes } from './components/reportes/reportes';
+import { Adopcionescliente } from './components/reportes/adopcionescliente/adopcionescliente';
+import { Resumenadopciones } from './components/reportes/resumenadopciones/resumenadopciones';
+import { Comentariosalbergue } from './components/reportes/comentariosalbergue/comentariosalbergue';
+import { Donacionescliente } from './components/reportes/donacionescliente/donacionescliente';
+import { Donacionesmetodopago } from './components/reportes/donacionesmetodopago/donacionesmetodopago';
+import { Recaudadoalbergue } from './components/reportes/recaudadoalbergue/recaudadoalbergue';
 
 export const routes: Routes = [
     { 
@@ -189,6 +196,29 @@ export const routes: Routes = [
             },
             {
                 path:'modification/:id', component:Creaeditavouchers
+            }
+        ],
+    },
+    {
+        path:'reportes', component:Reportes,
+        children:[
+            {
+                path:'cantidadAdopcionesCliente', component:Adopcionescliente
+            },
+            {
+                path:'resumenAdopcionesRefugio', component:Resumenadopciones
+            },
+            {
+                path:'comentariosPorAlbergue', component:Comentariosalbergue
+            },
+            {
+                path:'cantidadDonacionesCliente', component:Donacionescliente
+            },
+            {
+                path:'cantidadDonacionesMetodoPago', component:Donacionesmetodopago
+            },
+            {
+                path:'totalRecaudadoPorAlbergue', component:Recaudadoalbergue
             }
         ],
     },

@@ -1,0 +1,55 @@
+.chart-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 48px auto 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.10);
+  padding: 40px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #003c77;
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 420px !important;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+}
+
+.loading {
+  color: #003c77;
+  font-size: 1.1rem;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.no-data-message {
+  color: #f44336;
+  font-size: 1.1rem;
+  margin: 24px 0;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .chart-container {
+    padding: 16px 4px;
+  }
+  .chart-title {
+    font-size: 1.2rem;
+  }
+  canvas {
+    height: 260px !important;
+  }
+}

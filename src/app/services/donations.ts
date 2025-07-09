@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { donations } from '../models/donations';
 import { HttpClient } from '@angular/common/http';
 import { shelters } from '../models/shelters';
 import { clients } from '../models/clients';
 import { vouchers } from '../models/vouchers';
+import { DTODonacionesPorUsuario } from '../models/DTODonacionesPorUsuario';
+import { DTODonacionesPorMetodoPago } from '../models/DTODonacionesPorMetodoPago';
+import { DTOTotalRecaudadoAlbergue } from '../models/DTOTotalRecaudadoAlbergue';
 
 const base_url = environment.base;
 
@@ -56,5 +59,17 @@ export class Donations {
 
   getVouchers() {
     return this.http.get<vouchers[]>(`${this.url}/voucher/list`);
+  }
+
+  getAmountDonationByClient(): Observable<DTODonacionesPorUsuario[]> {
+    return this.http.get<DTODonacionesPorUsuario[]>(`${this.url}/donations/numberDonationsForUser`);
+  }
+
+  getAmountDonationByMethodPay(): Observable<DTODonacionesPorMetodoPago[]> {
+    return this.http.get<DTODonacionesPorMetodoPago[]>(`${this.url}/donations/numberDonationsForMethodPayment`);
+  }
+
+  getTotalRaisedByShelter(): Observable<DTOTotalRecaudadoAlbergue[]> {
+    return this.http.get<DTOTotalRecaudadoAlbergue[]>(`${this.url}/donations/totalCollectedForShelter`);
   }
 }

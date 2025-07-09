@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { clients } from '../models/clients';
 import { HttpClient } from '@angular/common/http';
 import { users } from '../models/users';
+import { DTOAdopcionesPorCliente } from '../models/DTOAdopcionesPorCliente';
 
 const base_url = environment.base;
 
@@ -46,5 +47,9 @@ export class Clients {
 
   getUsers() {
     return this.http.get<users[]>(`${this.url}/users/list`);
+  }
+
+  getAdoptionsByClient(): Observable<DTOAdopcionesPorCliente[]> {
+    return this.http.get<DTOAdopcionesPorCliente[]>(`${this.url}/client/numberAdoptionRequestsForClient`);
   }
 }

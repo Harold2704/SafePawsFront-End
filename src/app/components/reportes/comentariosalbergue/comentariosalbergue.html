@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Comentarios por Albergue</h2>
+  <div *ngIf="isLoading" class="loading">Cargando datos...</div>
+  <div *ngIf="!isLoading && comentariosAgrupados.length === 0" class="no-data-message">No hay datos para mostrar el reporte.</div>
+  <ng-container *ngIf="!isLoading && comentariosAgrupados.length > 0">
+    <div *ngFor="let albergue of comentariosAgrupados" class="shelter-card">
+      <div class="shelter-title">{{ albergue.nombreAlbergue }}</div>
+      <div *ngIf="albergue.comentarios.length > 0; else noComments">
+        <div *ngFor="let comentario of albergue.comentarios" class="comment-row">
+          <div style="display: flex; align-items: center; width: 100%;">
+            <span class="comment-date">📅 {{ comentario.fechaComentario | date:'mediumDate' }}</span>
+            <span class="comment-text" style="margin-left: 0.5rem;">{{ comentario.comentario }}</span>
+            <span class="comment-rating" style="margin-left: auto;">&#9733; {{ comentario.calificacion }}/5</span>
+          </div>
+        </div>
+      </div>
+      <ng-template #noComments>
+        <div class="no-comments">Sin comentarios.</div>
+      </ng-template>
+    </div>
+  </ng-container>
+</div>

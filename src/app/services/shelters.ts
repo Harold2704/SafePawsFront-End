@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { shelters } from '../models/shelters';
 import { HttpClient } from '@angular/common/http';
 import { users } from '../models/users';
+import { DTOResumenAdopcionesPorRefugio } from '../models/DTOResumenAdopcionesPorRefugio';
 
 const base_url = environment.base;
 
@@ -46,5 +47,9 @@ export class Shelters {
 
   getUsers() {
     return this.http.get<users[]>(`${this.url}/users/list`);
+  }
+
+  getSummaryAdoptionsByShelter(): Observable<DTOResumenAdopcionesPorRefugio[]> {
+    return this.http.get<DTOResumenAdopcionesPorRefugio[]>(`${this.url}/shelter/adoptionSummaryForShelter`);
   }
 }

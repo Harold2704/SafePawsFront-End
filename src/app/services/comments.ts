@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { comments } from '../models/comments';
 import { HttpClient } from '@angular/common/http';
 import { shelters } from '../models/shelters';
 import { clients } from '../models/clients';
+import { DTOComentariosPorAlbergue } from '../models/DTOComentariosPorAlbergue';
 
 const base_url = environment.base;
 
@@ -51,5 +52,9 @@ export class Comments {
 
   getClients() {
     return this.http.get<clients[]>(`${this.url}/client/list`);
+  }
+
+  getCommentsByShelter(): Observable<DTOComentariosPorAlbergue[]> {
+    return this.http.get<DTOComentariosPorAlbergue[]>(`${this.url}/comments/shelterComments`);
   }
 }

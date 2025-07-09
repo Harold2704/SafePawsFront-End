@@ -45,12 +45,16 @@
           <span class="menu-title">Vacunas</span>
       </button>
       <button mat-menu-item [matMenuTriggerFor]="vaccinePetsMenu">
-          <mat-icon class="main-menu-icon">pets</mat-icon>
+          <mat-icon class="main-menu-icon">assignment</mat-icon>
           <span class="menu-title">Vacunas Mascotas</span>
       </button>
       <button mat-menu-item [matMenuTriggerFor]="vouchersMenu">
           <mat-icon class="main-menu-icon">confirmation_number</mat-icon>
           <span class="menu-title">Vouchers</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="reportesMenu">
+          <mat-icon class="main-menu-icon">assessment</mat-icon>
+          <span class="menu-title">Reportes</span>
       </button>
   </mat-menu>
   <router-outlet></router-outlet>
@@ -175,6 +179,33 @@
     <button mat-menu-item routerLink="/voucher/register">
         <mat-icon class="submenu-icon">add</mat-icon>
         <span class="submenu-title">Registrar</span>
+    </button>
+</mat-menu>
+
+<mat-menu #reportesMenu="matMenu" class="submenu">
+    <button mat-menu-item routerLink="/reportes/cantidadAdopcionesCliente">
+        <mat-icon class="submenu-icon">equalizer</mat-icon>
+        <span class="submenu-title">Adopciones por cliente</span>
+    </button>
+    <button mat-menu-item routerLink="/reportes/resumenAdopcionesRefugio">
+        <mat-icon class="submenu-icon">stacked_bar_chart</mat-icon>
+        <span class="submenu-title">Resumen de adopciones</span>
+    </button>
+    <button mat-menu-item routerLink="/reportes/comentariosPorAlbergue">
+        <mat-icon class="submenu-icon">comment_bank</mat-icon>
+        <span class="submenu-title">Comentarios por albergue</span>
+    </button>
+    <button mat-menu-item routerLink="/reportes/cantidadDonacionesCliente">
+        <mat-icon class="submenu-icon">equalizer</mat-icon>
+        <span class="submenu-title">Donaciones por cliente</span>
+    </button>
+    <button mat-menu-item routerLink="/reportes/cantidadDonacionesMetodoPago">
+        <mat-icon class="submenu-icon">pie_chart</mat-icon>
+        <span class="submenu-title">Donaciones por método de pago</span>
+    </button>
+    <button mat-menu-item routerLink="/reportes/totalRecaudadoPorAlbergue">
+        <mat-icon class="submenu-icon">monetization_on</mat-icon>
+        <span class="submenu-title">Total recaudado por albergue</span>
     </button>
 </mat-menu>
 
