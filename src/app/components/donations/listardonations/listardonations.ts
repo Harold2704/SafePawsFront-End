@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { donations } from '../../../models/donations';
 import { Donations } from '../../../services/donations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listardonations',
@@ -25,22 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listardonations implements OnInit {
   dataSource: MatTableDataSource<donations> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'c5',
-    'c6',
-    'c7',
-    'c8',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dS: Donations, private snackBar: MatSnackBar) {}
+  constructor(private dS: Donations, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.dS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -97,5 +88,10 @@ export class Listardonations implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando donación con ID: ${id}`);
+    this.router.navigate(['/donations/modification', id]);
   }
 }

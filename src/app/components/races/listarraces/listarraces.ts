@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { races } from '../../../models/races';
 import { Races } from '../../../services/races';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarraces',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarraces implements OnInit {
   dataSource: MatTableDataSource<races> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private rS: Races, private snackBar: MatSnackBar) {}
+  constructor(private rS: Races, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.rS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -77,5 +78,10 @@ export class Listarraces implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando raza con ID: ${id}`);
+    this.router.navigate(['/race/modification', id]);
   }
 }

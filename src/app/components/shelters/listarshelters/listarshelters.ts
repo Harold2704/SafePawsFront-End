@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { shelters } from '../../../models/shelters';
 import { Shelters } from '../../../services/shelters';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarshelters',
@@ -25,21 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarshelters implements OnInit {
   dataSource: MatTableDataSource<shelters> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'c5',
-    'c6',
-    'c7',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sS: Shelters, private snackBar: MatSnackBar) {}
+  constructor(private sS: Shelters, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.sS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -86,5 +78,10 @@ export class Listarshelters implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando refugio con ID: ${id}`);
+    this.router.navigate(['/shelter/modification', id]);
   }
 }

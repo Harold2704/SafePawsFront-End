@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { adoptions } from '../../../models/adoptions';
 import { Adoptions } from '../../../services/adoptions';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listaradoptions',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listaradoptions implements OnInit {
   dataSource: MatTableDataSource<adoptions> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private aS: Adoptions, private snackBar: MatSnackBar) {}
+  constructor(private aS: Adoptions, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.aS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -85,5 +86,10 @@ export class Listaradoptions implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando adopción con ID: ${id}`);
+    this.router.navigate(['/adoption/modification', id]);
   }
 }

@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { vouchers } from '../../../models/vouchers';
 import { Vouchers } from '../../../services/vouchers';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarvouchers',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarvouchers implements OnInit {
   dataSource: MatTableDataSource<vouchers> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private vS: Vouchers, private snackBar: MatSnackBar) {}
+  constructor(private vS: Vouchers, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.vS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -77,5 +78,10 @@ export class Listarvouchers implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando comprobante con ID: ${id}`);
+    this.router.navigate(['/voucher/modification', id]);
   }
 }

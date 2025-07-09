@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { comments } from '../../../models/comments';
 import { Comments } from '../../../services/comments';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarcomments',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarcomments implements OnInit {
   dataSource: MatTableDataSource<comments> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: Comments, private snackBar: MatSnackBar) {}
+  constructor(private cS: Comments, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.cS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -83,5 +84,10 @@ export class Listarcomments implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando comentario con ID: ${id}`);
+    this.router.navigate(['/comments/modification', id]);
   }
 }

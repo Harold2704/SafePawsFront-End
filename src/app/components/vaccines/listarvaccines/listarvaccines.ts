@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { vaccines } from '../../../models/vaccines';
 import { Vaccines } from '../../../services/vaccines';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarvaccines',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarvaccines implements OnInit {
   dataSource: MatTableDataSource<vaccines> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private vS: Vaccines, private snackBar: MatSnackBar) {}
+  constructor(private vS: Vaccines, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.vS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -77,5 +78,10 @@ export class Listarvaccines implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando vacuna con ID: ${id}`);
+    this.router.navigate(['/vaccine/modification', id]);
   }
 }

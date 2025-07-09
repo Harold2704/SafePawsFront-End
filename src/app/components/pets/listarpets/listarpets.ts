@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { pets } from '../../../models/pets';
 import { Pets } from '../../../services/pets';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarpets',
@@ -25,23 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarpets implements OnInit {
   dataSource: MatTableDataSource<pets> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'c5',
-    'c6',
-    'c7',
-    'c8',
-    'c9',
-    'acciones',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private pS: Pets, private snackBar: MatSnackBar) {}
+  constructor(private pS: Pets, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.pS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -88,5 +78,10 @@ export class Listarpets implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando mascota con ID: ${id}`);
+    this.router.navigate(['/pet/modification', id]);
   }
 }

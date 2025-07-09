@@ -26,18 +26,7 @@ import { Router } from '@angular/router';
 })
 export class Listarclients implements OnInit {
   dataSource: MatTableDataSource<clients> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'c1',
-    'c2',
-    'c3',
-    'c4',
-    'c5',
-    'c6',
-    'c7',
-    'c8',
-    'accion01',
-    'accion02',
-  ];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

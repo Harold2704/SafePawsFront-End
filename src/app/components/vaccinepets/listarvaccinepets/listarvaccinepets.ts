@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { vaccinepets } from '../../../models/vaccinepets';
 import { Vaccinepets } from '../../../services/vaccinepets';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarvaccinepets',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarvaccinepets implements OnInit {
   dataSource: MatTableDataSource<vaccinepets> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private vS: Vaccinepets, private snackBar: MatSnackBar) {}
+  constructor(private vS: Vaccinepets, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.vS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -85,5 +86,10 @@ export class Listarvaccinepets implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando vacuna por mascota con ID: ${id}`);
+    this.router.navigate(['/vaccinePet/modification', id]);
   }
 }

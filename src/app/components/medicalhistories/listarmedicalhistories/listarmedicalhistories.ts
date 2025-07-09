@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { medicalhistories } from '../../../models/medicalhistories';
 import { Medicalhistories } from '../../../services/medicalhistories';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarmedicalhistories',
@@ -25,12 +26,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Listarmedicalhistories implements OnInit {
   dataSource: MatTableDataSource<medicalhistories> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'acciones'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'accion01', 'accion02'];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private mS: Medicalhistories, private snackBar: MatSnackBar) {}
+  constructor(private mS: Medicalhistories, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.mS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -87,5 +88,10 @@ export class Listarmedicalhistories implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando historial medico con ID: ${id}`);
+    this.router.navigate(['/medicalhistory/modification', id]);
   }
 }

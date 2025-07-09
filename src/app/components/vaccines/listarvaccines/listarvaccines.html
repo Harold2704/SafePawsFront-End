@@ -40,11 +40,20 @@
                 </ng-container>
 
                 <!-- Acciones Column -->
-                <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <ng-container matColumnDef="accion01">
+                    <th mat-header-cell *matHeaderCellDef> Eliminar </th>
                     <td mat-cell *matCellDef="let element">
                         <mat-icon style="cursor: pointer; color: red;"
                             (click)="eliminar(element.idVaccine)">delete</mat-icon>
+                    </td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="accion02">
+                    <th mat-header-cell *matHeaderCellDef> Editar </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon style="cursor: pointer; color: blue;"
+                            (click)="editar(element.idVaccine)">edit</mat-icon>
                     </td>
                 </ng-container>
 
