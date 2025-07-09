@@ -1,14 +1,15 @@
-<!-- Gráfico de barras de adopciones por cliente -->
-<div class="chart-container">
-  <h2>Cantidad de adopciones por cliente</h2>
-  <div *ngIf="isLoading" class="loading">Cargando datos...</div>
-  <div *ngIf="!isLoading && data.length === 0" class="no-data-message">No hay datos para mostrar el reporte.</div>
-  <div *ngIf="!isLoading && data.length > 0" class="bar-chart">
-    <div *ngFor="let client of data" class="bar-row">
-      <span class="label">{{ getFullName(client) }}</span>
-      <div class="bar" [style.width.%]="(client.totalAdopciones / maxAdoptions()) * 80">
-        <span class="bar-value">{{ client.totalAdopciones }}</span>
-      </div>
+<div class="title-container">
+    <div class="title" style="text-align: center;">
+        <h1>Cantidad de adopciones por cliente</h1>
     </div>
-  </div>
+    <div *ngIf="isLoading" class="loading-message" style="text-align: center; margin: 2rem 0;">
+        Cargando...
+    </div>
+    <div *ngIf="!isLoading && !hasData" class="no-data-message" style="text-align: center; margin: 2rem 0;">
+        No hay datos para mostrar.
+    </div>
+    <div class="chart-container" style="text-align: center;" *ngIf="!isLoading && hasData">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [legend]="barChartLegend" [type]="barChartType"></canvas>
+    </div>
 </div>

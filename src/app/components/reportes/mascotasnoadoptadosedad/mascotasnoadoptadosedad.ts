@@ -1,45 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  Chart,
-  ChartDataset,
-  ChartOptions,
-  ChartType,
-  registerables,
-} from 'chart.js';
-import { Donations } from '../../../services/donations';
-import { BaseChartDirective } from 'ng2-charts';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Chart, ChartDataset, ChartOptions, ChartType, registerables } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { Pets } from '../../../services/pets';
 
 Chart.register(...registerables);
 
 @Component({
-  selector: 'app-donacionesmetodopago',
+  selector: 'app-mascotasnoadoptadosedad',
   standalone: true,
   imports: [BaseChartDirective, CommonModule],
-  templateUrl: './donacionesmetodopago.html',
-  styleUrl: './donacionesmetodopago.css',
+  templateUrl: './mascotasnoadoptadosedad.html',
+  styleUrl: './mascotasnoadoptadosedad.css'
 })
-export class Donacionesmetodopago implements OnInit {
+export class Mascotasnoadoptadosedad implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
   barChartLabels: string[] = [];
-  barChartType: ChartType = 'pie';
+  barChartType: ChartType = 'doughnut';
   barChartLegend = true;
   barChartData: ChartDataset[] = [];
   isLoading = true;
   hasData = false;
-  constructor(private dS: Donations) {}
+  constructor(private pS: Pets) {}
   ngOnInit(): void {
     this.isLoading = true;
-    this.dS.getAmountDonationByMethodPay().subscribe(
+    this.pS.getPetsNotAdoptedByAge().subscribe(
       (data) => {
-        this.barChartLabels = data.map((item) => item.metodoPago);
-        const chartData = data.map((item) => item.totalDonaciones);
+        this.barChartLabels = data.map((item) => item.grupoEdad);
+        const chartData = data.map((item) => item.cantidad);
         this.barChartData = [
           {
             data: chartData,
-            label: 'Cantidad de Donaciones',
+            label: 'Cantidad de Mascotas No Adoptadas por Edad',
             backgroundColor: [
               '#95B5EA',
               '#373DA0',

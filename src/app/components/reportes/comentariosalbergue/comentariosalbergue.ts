@@ -23,11 +23,11 @@ export class Comentariosalbergue implements OnInit {
   comentariosAgrupados: ComentariosAgrupados[] = [];
   isLoading: boolean = true;
 
-  constructor(private commentsService: Comments) {}
+  constructor(private cS: Comments) {}
 
   ngOnInit() {
     this.isLoading = true;
-    this.commentsService.getCommentsByShelter().subscribe(
+    this.cS.getCommentsByShelter().subscribe(
       (data: DTOComentariosPorAlbergue[]) => {
         this.comentariosAgrupados = this.agruparPorAlbergue(data);
         this.isLoading = false;

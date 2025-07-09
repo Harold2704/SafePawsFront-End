@@ -40,6 +40,10 @@ import { Comentariosalbergue } from './components/reportes/comentariosalbergue/c
 import { Donacionescliente } from './components/reportes/donacionescliente/donacionescliente';
 import { Donacionesmetodopago } from './components/reportes/donacionesmetodopago/donacionesmetodopago';
 import { Recaudadoalbergue } from './components/reportes/recaudadoalbergue/recaudadoalbergue';
+import { Adopcionesalbergue } from './components/reportes/adopcionesalbergue/adopcionesalbergue';
+import { Alberguesnollenos } from './components/reportes/alberguesnollenos/alberguesnollenos';
+import { Top5razasadoptadas } from './components/reportes/top5razasadoptadas/top5razasadoptadas';
+import { Mascotasnoadoptadosedad } from './components/reportes/mascotasnoadoptadosedad/mascotasnoadoptadosedad';
 
 export const routes: Routes = [
     { 
@@ -219,6 +223,18 @@ export const routes: Routes = [
             },
             {
                 path:'totalRecaudadoPorAlbergue', component:Recaudadoalbergue
+            },
+            {
+                path:'mascotasAdoptadasPorAlbergue', component:Adopcionesalbergue
+            },
+            {
+                path:'alberguesNoLlenos', component:Alberguesnollenos
+            },
+            {
+                path:'top5RazasMasAdoptadas', component:Top5razasadoptadas
+            },
+            {
+                path:'mascotasNoAdoptadasPorEdad', component:Mascotasnoadoptadosedad
             }
         ],
     },

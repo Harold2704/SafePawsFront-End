@@ -1,65 +1,60 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Chart, ChartDataset, ChartOptions, ChartType, registerables } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { Shelters } from '../../../services/shelters';
-import { DTOResumenAdopcionesPorRefugio } from '../../../models/DTOResumenAdopcionesPorRefugio';
-import Chart from 'chart.js/auto';
+
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-resumenadopciones',
   standalone: true,
-  imports: [CommonModule],
+  imports: [BaseChartDirective, CommonModule],
   templateUrl: './resumenadopciones.html',
-  styleUrl: './resumenadopciones.css',
+  styleUrl: './resumenadopciones.css'
 })
 export class Resumenadopciones implements OnInit {
-  @ViewChild('barCanvas', { static: true })
-  barCanvas!: ElementRef<HTMLCanvasElement>;
-  resumen: DTOResumenAdopcionesPorRefugio[] = [];
-  chart: any;
-  loading: boolean = true;
-
-  constructor(private sheltersService: Shelters) {}
-
+  barChartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { display: true },
+    },
+  };
+  barChartLabels: string[] = [];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartData: ChartDataset[] = [];
+  isLoading = true;
+  hasData = false;
+  constructor(private sS: Shelters) {}
   ngOnInit(): void {
-    this.sheltersService.getSummaryAdoptionsByShelter().subscribe(
+    this.isLoading = true;
+    this.sS.getSummaryAdoptionsByShelter().subscribe(
       (data) => {
-        this.resumen = data;
-        this.createChart();
-        this.loading = false;
+        this.barChartLabels = data.map(item => item.nombreAlbergue);
+        this.barChartData = [
+          {
+            data: data.map(item => item.mascotasAdoptadas),
+            label: 'Adoptadas',
+            backgroundColor: '#2DCE98',
+            borderColor: '#fff',
+            borderWidth: 2,
+          },
+          {
+            data: data.map(item => item.mascotasNoAdoptadas),
+            label: 'No adoptadas',
+            backgroundColor: '#EA5455',
+            borderColor: '#fff',
+            borderWidth: 2,
+          }
+        ];
+        this.hasData = data.length > 0;
+        this.isLoading = false;
       },
       () => {
-        this.loading = false;
+        this.hasData = false;
+        this.isLoading = false;
       }
     );
-  }
-
-  createChart() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-    this.chart = new Chart(this.barCanvas.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: this.resumen.map((x) => x.nombreAlbergue),
-        datasets: [
-          {
-            label: 'Mascotas Adoptadas',
-            data: this.resumen.map((x) => x.mascotasAdoptadas),
-            backgroundColor: '#4caf50',
-          },
-          {
-            label: 'Mascotas No Adoptadas',
-            data: this.resumen.map((x) => x.mascotasNoAdoptadas),
-            backgroundColor: '#f44336',
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: true },
-        },
-      },
-    });
   }
 }

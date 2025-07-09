@@ -27,14 +27,13 @@ export class Recaudadoalbergue implements OnInit {
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartData: ChartDataset[] = [];
-  isLoading = true; // Nueva variable para controlar la carga
-  hasData = false; // Nueva variable para controlar si hay datos
-  constructor(private ds: Donations) {}
+  isLoading = true;
+  hasData = false;
+  constructor(private dS: Donations) {}
   ngOnInit(): void {
     this.isLoading = true;
-    this.ds.getTotalRaisedByShelter().subscribe(
+    this.dS.getTotalRaisedByShelter().subscribe(
       (data) => {
-        // Paleta de colores (puedes agregar más o generar aleatorios si hay más refugios)
         const colors = [
           '#95B5EA',
           '#373DA0',
@@ -57,7 +56,7 @@ export class Recaudadoalbergue implements OnInit {
           '#ED4C67',
           '#009432',
         ];
-        this.barChartLabels = ['Total recaudado']; // Solo una barra por dataset
+        this.barChartLabels = ['Total recaudado'];
         this.barChartData = data.map((item, idx) => ({
           data: [item.totalRecaudado],
           label: item.nombreRefugio,
