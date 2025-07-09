@@ -5,7 +5,11 @@ import { DTOComentariosPorAlbergue } from '../../../models/DTOComentariosPorAlbe
 
 interface ComentariosAgrupados {
   nombreAlbergue: string;
-  comentarios: { comentario: string; fechaComentario: Date; calificacion: number }[];
+  comentarios: {
+    comentario: string;
+    fechaComentario: Date;
+    calificacion: number;
+  }[];
 }
 
 @Component({
@@ -13,7 +17,7 @@ interface ComentariosAgrupados {
   templateUrl: './comentariosalbergue.html',
   styleUrl: './comentariosalbergue.css',
   providers: [Comments],
-  imports: [CommonModule, DatePipe]
+  imports: [CommonModule, DatePipe],
 })
 export class Comentariosalbergue implements OnInit {
   comentariosAgrupados: ComentariosAgrupados[] = [];
@@ -23,29 +27,40 @@ export class Comentariosalbergue implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.commentsService.getCommentsByShelter().subscribe((data: DTOComentariosPorAlbergue[]) => {
-      this.comentariosAgrupados = this.agruparPorAlbergue(data);
-      this.isLoading = false;
-    }, () => {
-      this.isLoading = false;
-    });
+    this.commentsService.getCommentsByShelter().subscribe(
+      (data: DTOComentariosPorAlbergue[]) => {
+        this.comentariosAgrupados = this.agruparPorAlbergue(data);
+        this.isLoading = false;
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 
-  private agruparPorAlbergue(data: DTOComentariosPorAlbergue[]): ComentariosAgrupados[] {
-    const agrupados: { [key: string]: { comentario: string; fechaComentario: Date; calificacion: number }[] } = {};
-    data.forEach(item => {
+  private agruparPorAlbergue(
+    data: DTOComentariosPorAlbergue[]
+  ): ComentariosAgrupados[] {
+    const agrupados: {
+      [key: string]: {
+        comentario: string;
+        fechaComentario: Date;
+        calificacion: number;
+      }[];
+    } = {};
+    data.forEach((item) => {
       if (!agrupados[item.nombreAlbergue]) {
         agrupados[item.nombreAlbergue] = [];
       }
       agrupados[item.nombreAlbergue].push({
         comentario: item.comentario,
         fechaComentario: new Date(item.fechaComentario),
-        calificacion: item.calificacion
+        calificacion: item.calificacion,
       });
     });
-    return Object.keys(agrupados).map(nombreAlbergue => ({
+    return Object.keys(agrupados).map((nombreAlbergue) => ({
       nombreAlbergue,
-      comentarios: agrupados[nombreAlbergue]
+      comentarios: agrupados[nombreAlbergue],
     }));
   }
 }

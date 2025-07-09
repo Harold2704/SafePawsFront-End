@@ -1,0 +1,88 @@
+.chart-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #f8fafc;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 40px 32px 32px 32px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 36px;
+  color: #003c77;
+  font-size: 2.1em;
+  letter-spacing: 1px;
+}
+
+.loading, .no-data {
+  text-align: center;
+  color: #888;
+  margin: 28px 0;
+  font-size: 1.1em;
+}
+
+.bar-chart {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+  min-height: 44px;
+}
+
+.label {
+  width: 200px;
+  font-weight: 600;
+  color: #003c77;
+  margin-right: 18px;
+  text-align: right;
+  font-size: 1.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar {
+  background: linear-gradient(90deg, #d88ba4 0%, #AF194A 100%);
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  min-width: 48px;
+  transition: width 0.4s cubic-bezier(.4,2,.6,1);
+  position: relative;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.10);
+}
+
+.bar-value {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.15em;
+  position: absolute;
+  right: 16px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.no-data-message {
+  color: #f44336;
+  font-size: 1.1rem;
+  margin: 24px 0;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .chart-container {
+    padding: 18px 4px;
+  }
+  .label {
+    width: 90px;
+    font-size: 0.95em;
+  }
+  .bar {
+    height: 28px;
+  }
+}

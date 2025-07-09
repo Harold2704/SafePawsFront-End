@@ -1,1 +1,14 @@
-<p>donacionescliente works!</p>
+<!-- Gráfico de barras de donaciones por cliente -->
+<div class="chart-container">
+  <h2>Cantidad de donaciones por cliente</h2>
+  <div *ngIf="isLoading" class="loading">Cargando datos...</div>
+  <div *ngIf="!isLoading && data.length === 0" class="no-data-message">No hay datos para mostrar el reporte.</div>
+  <div *ngIf="!isLoading && data.length > 0" class="bar-chart">
+    <div *ngFor="let client of data" class="bar-row">
+      <span class="label">{{ getFullName(client) }}</span>
+      <div class="bar" [style.width.%]="(client.totalDonations / maxDonations()) * 80">
+        <span class="bar-value">{{ client.totalDonations }}</span>
+      </div>
+    </div>
+  </div>
+</div>

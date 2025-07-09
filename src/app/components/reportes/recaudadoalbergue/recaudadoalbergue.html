@@ -1,1 +1,15 @@
-<p>recaudadoalbergue works!</p>
+<div class="title-container">
+    <div class="title" style="text-align: center;">
+        <h1>Total recaudado de dinero por albergue</h1>
+    </div>
+    <div *ngIf="isLoading" class="loading-message" style="text-align: center; margin: 2rem 0;">
+        Cargando...
+    </div>
+    <div *ngIf="!isLoading && !hasData" class="no-data-message" style="text-align: center; margin: 2rem 0;">
+        No hay datos para mostrar.
+    </div>
+    <div class="chart-container" style="text-align: center;" *ngIf="!isLoading && hasData">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [legend]="barChartLegend" [type]="barChartType"></canvas>
+    </div>
+</div>

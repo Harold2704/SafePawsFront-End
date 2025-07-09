@@ -1,7 +1,8 @@
 <div class="container">
   <h2>Comentarios por Albergue</h2>
   <div *ngIf="isLoading" class="loading">Cargando datos...</div>
-  <div *ngIf="!isLoading && comentariosAgrupados.length === 0" class="no-data-message">No hay datos para mostrar el reporte.</div>
+  <div *ngIf="!isLoading && comentariosAgrupados.length === 0" class="no-data-message">No hay datos para mostrar el
+    reporte.</div>
   <ng-container *ngIf="!isLoading && comentariosAgrupados.length > 0">
     <div *ngFor="let albergue of comentariosAgrupados" class="shelter-card">
       <div class="shelter-title">{{ albergue.nombreAlbergue }}</div>

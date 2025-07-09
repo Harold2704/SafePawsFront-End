@@ -8,7 +8,7 @@ import { DTOAdopcionesPorCliente } from '../../../models/DTOAdopcionesPorCliente
   standalone: true,
   imports: [CommonModule],
   templateUrl: './adopcionescliente.html',
-  styleUrl: './adopcionescliente.css'
+  styleUrl: './adopcionescliente.css',
 })
 export class Adopcionescliente implements OnInit {
   data: DTOAdopcionesPorCliente[] = [];
@@ -24,7 +24,7 @@ export class Adopcionescliente implements OnInit {
       },
       error: () => {
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -33,6 +33,8 @@ export class Adopcionescliente implements OnInit {
   }
 
   maxAdoptions(): number {
-    return this.data.length > 0 ? Math.max(...this.data.map(c => c.totalAdopciones)) : 1;
+    return this.data.length > 0
+      ? Math.max(...this.data.map((c) => c.totalAdopciones))
+      : 1;
   }
 }
