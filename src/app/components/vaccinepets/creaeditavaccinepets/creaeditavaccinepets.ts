@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -12,7 +12,7 @@ import { vaccinepets } from '../../../models/vaccinepets';
 import { vaccines } from '../../../models/vaccines';
 import { pets } from '../../../models/pets';
 import { Vaccinepets } from '../../../services/vaccinepets';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -38,23 +38,34 @@ export class Creaeditavaccinepets implements OnInit {
   vaccinepets: vaccinepets = new vaccinepets();
   vaccines: vaccines[] = [];
   pets: pets[] = [];
+  id: number = 0;
+  edicion: boolean = false;
 
   constructor(
     private vS: Vaccinepets,
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       hdateApplication: ['', [Validators.required, this.fechaNoMayorHoyValidator()]],
       hidVaccine: ['', [Validators.required]],
       hidPet: ['', [Validators.required]],
     });
+
     this.vS.getVaccines().subscribe((data) => {
       this.vaccines = data;
     });
+
     this.vS.getPets().subscribe((data) => {
       this.pets = data;
     });
@@ -79,19 +90,44 @@ export class Creaeditavaccinepets implements OnInit {
     this.vaccinepets.dateApplication = this.form.value.hdateApplication;
     this.vaccinepets.idVaccine = this.form.value.hidVaccine;
     this.vaccinepets.idPet = this.form.value.hidPet;
-    this.vS.insert(this.vaccinepets).subscribe({
-      next: () => {
+
+    if (this.edicion) {
+      this.vS.update(this.id, this.vaccinepets).subscribe(() => {
         this.vS.list().subscribe((d) => {
           this.vS.setList(d);
         });
-        this.snackBar.open('Transacción registrada exitosamente', 'Cerrar', {
+        this.snackBar.open('Edición exitosa', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
         this.router.navigate(['/vaccinePet/list']);
-      },
-    });
+      });
+    } else {
+      this.vS.insert(this.vaccinepets).subscribe(() => {
+        this.vS.list().subscribe((d) => {
+          this.vS.setList(d);
+        });
+        this.snackBar.open('Registro exitoso', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.router.navigate(['/vaccinePet/list']);
+      });
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.vS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          hdateApplication: new FormControl(data.dateApplication),
+          hidVaccine: new FormControl(data.idVaccine),
+          hidPet: new FormControl(data.idPet),
+        });
+      });
+    }
   }
 
   cancelar(): void {

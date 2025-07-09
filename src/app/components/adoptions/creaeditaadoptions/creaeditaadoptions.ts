@@ -1,6 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -12,7 +21,7 @@ import { adoptions } from '../../../models/adoptions';
 import { pets } from '../../../models/pets';
 import { clients } from '../../../models/clients';
 import { Adoptions } from '../../../services/adoptions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -31,22 +40,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ReactiveFormsModule,
   ],
   templateUrl: './creaeditaadoptions.html',
-  styleUrl: './creaeditaadoptions.css'
+  styleUrl: './creaeditaadoptions.css',
 })
 export class Creaeditaadoptions implements OnInit {
   form: FormGroup = new FormGroup({});
   adoptions: adoptions = new adoptions();
   clients: clients[] = [];
   pets: pets[] = [];
+  id: number = 0;
+  edicion: boolean = false;
 
   constructor(
     private aS: Adoptions,
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       hobservation: ['', [Validators.required, Validators.minLength(10)]],
       hdateAdoption: ['', [Validators.required, this.fechaNoMayorHoyValidator()]],
@@ -54,9 +72,11 @@ export class Creaeditaadoptions implements OnInit {
       hidClient: ['', [Validators.required]],
       hidPet: ['', [Validators.required]],
     });
+
     this.aS.getClients().subscribe((data) => {
       this.clients = data;
     });
+
     this.aS.getPets().subscribe((data) => {
       this.pets = data;
     });
@@ -83,19 +103,46 @@ export class Creaeditaadoptions implements OnInit {
     this.adoptions.status = this.form.value.hstatus;
     this.adoptions.idClient = this.form.value.hidClient;
     this.adoptions.idPet = this.form.value.hidPet;
-    this.aS.insert(this.adoptions).subscribe({
-      next: () => {
+
+    if (this.edicion) {
+      this.aS.update(this.id, this.adoptions).subscribe(() => {
         this.aS.list().subscribe((d) => {
           this.aS.setList(d);
         });
-        this.snackBar.open('Transacción registrada exitosamente', 'Cerrar', {
+        this.snackBar.open('Edición exitosa', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
         this.router.navigate(['/adoption/list']);
-      },
-    });
+      });
+    } else {
+      this.aS.insert(this.adoptions).subscribe(() => {
+        this.aS.list().subscribe((d) => {
+          this.aS.setList(d);
+        });
+        this.snackBar.open('Registro exitoso', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.router.navigate(['/adoption/list']);
+      });
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.aS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          hobservation: new FormControl(data.observation),
+          hdateAdoption: new FormControl(data.dateAdoption),
+          hstatus: new FormControl(data.status),
+          hidClient: new FormControl(data.idClient),
+          hidPet: new FormControl(data.idPet),
+        });
+      });
+    }
   }
 
   cancelar(): void {

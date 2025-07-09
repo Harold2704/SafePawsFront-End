@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidatorFn,
-  Validators,
+import { 
+  AbstractControl, 
+  FormBuilder, 
+  FormControl, 
+  FormGroup, 
+  FormsModule, 
+  ReactiveFormsModule, 
+  ValidatorFn, 
+  Validators 
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -72,34 +72,10 @@ export class Creaeditaclients implements OnInit {
     this.form = this.formBuilder.group({
       hname: ['', [Validators.required, Validators.minLength(4)]],
       hlastName: ['', [Validators.required, Validators.minLength(4)]],
-      hdni: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8),
-          Validators.pattern('^[0-9]{8}$'),
-        ],
-      ],
+      hdni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[0-9]{8}$')]],
       hgender: ['', [Validators.required]],
-      hemail: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(11),
-          Validators.pattern('^[a-zA-Z0-9._%+-]+@gmail\\.com$'),
-        ],
-      ],
-      hnumber: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(9),
-          Validators.pattern('^[0-9]{9}$'),
-        ],
-      ],
+      hemail: ['', [Validators.required, Validators.email, Validators.minLength(11), Validators.pattern('^[a-zA-Z0-9._%+-]+@gmail\\.com$')]],
+      hnumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]{9}$')]],
       hadress: ['', [Validators.required, Validators.minLength(11)]],
       hidUser: ['', [Validators.required]],
     });

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { races } from '../../../models/races';
 import { Races } from '../../../services/races';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -34,6 +34,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class Creaeditaraces implements OnInit {
   form: FormGroup = new FormGroup({});
   races: races = new races();
+  id: number = 0;
+  edicion: boolean = false;
 
   listspecies: { value: string; viewValue: string }[] = [
     { value: 'Perro', viewValue: 'Perro' },
@@ -44,10 +46,17 @@ export class Creaeditaraces implements OnInit {
     private rS: Races,
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       hname: ['', [Validators.required, Validators.minLength(4)]],
       hspecies: ['', [Validators.required]],
@@ -61,19 +70,43 @@ export class Creaeditaraces implements OnInit {
     }
     this.races.name = this.form.value.hname;
     this.races.species = this.form.value.hspecies;
-    this.rS.insert(this.races).subscribe({
-      next: () => {
+
+    if (this.edicion) {
+      this.rS.update(this.id, this.races).subscribe(() => {
         this.rS.list().subscribe((d) => {
           this.rS.setList(d);
         });
-        this.snackBar.open('Transacción registrada exitosamente', 'Cerrar', {
+        this.snackBar.open('Edición exitosa', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
         this.router.navigate(['/race/list']);
-      },
-    });
+      });
+    } else {
+      this.rS.insert(this.races).subscribe(() => {
+        this.rS.list().subscribe((d) => {
+          this.rS.setList(d);
+        });
+        this.snackBar.open('Registro exitoso', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.router.navigate(['/race/list']);
+      });
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.rS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          hname: new FormControl(data.name),
+          hspecies: new FormControl(data.species),
+        });
+      });
+    }
   }
 
   cancelar(): void {

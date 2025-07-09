@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -20,7 +21,7 @@ import { comments } from '../../../models/comments';
 import { shelters } from '../../../models/shelters';
 import { clients } from '../../../models/clients';
 import { Comments } from '../../../services/comments';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -46,6 +47,8 @@ export class Creaeditacomments implements OnInit {
   comments: comments = new comments();
   shelters: shelters[] = [];
   clients: clients[] = [];
+  id: number = 0;
+  edicion: boolean = false;
 
   listrating: { value: number; viewValue: number }[] = [
     { value: 1, viewValue: 1 },
@@ -59,23 +62,29 @@ export class Creaeditacomments implements OnInit {
     private cS: Comments,
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       hdescription: ['', [Validators.required, Validators.minLength(8)]],
       hqualification: ['', [Validators.required]],
-      hpublicationDate: [
-        '',
-        [Validators.required, this.fechaNoMayorHoyValidator()],
-      ],
+      hpublicationDate: ['', [Validators.required, this.fechaNoMayorHoyValidator()]],
       hidShelter: ['', [Validators.required]],
       hidClient: ['', [Validators.required]],
     });
+
     this.cS.getShelters().subscribe((data) => {
       this.shelters = data;
     });
+
     this.cS.getClients().subscribe((data) => {
       this.clients = data;
     });
@@ -102,19 +111,46 @@ export class Creaeditacomments implements OnInit {
     this.comments.publicationDate = this.form.value.hpublicationDate;
     this.comments.idShelter = this.form.value.hidShelter;
     this.comments.idClient = this.form.value.hidClient;
-    this.cS.insert(this.comments).subscribe({
-      next: () => {
-        this.cS.list().subscribe((d) => {
-          this.cS.setList(d);
+
+    if (this.edicion) {
+      this.cS.update(this.id, this.comments).subscribe(() => {
+        this.cS.list().subscribe((data) => {
+          this.cS.setList(data);
         });
-        this.snackBar.open('Transacción registrada exitosamente', 'Cerrar', {
+        this.snackBar.open('Edición exitosa', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
         this.router.navigate(['/comments/list']);
-      },
-    });
+      });
+    } else {
+      this.cS.insert(this.comments).subscribe(() => {
+        this.cS.list().subscribe((data) => {
+          this.cS.setList(data);
+        });
+        this.snackBar.open('Registro exitoso', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.router.navigate(['/comments/list']);
+      });
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.cS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          hdescription: new FormControl(data.description),
+          hpublicationDate: new FormControl(data.publicationDate),
+          hqualification: new FormControl(data.qualification),
+          hidShelter: new FormControl(data.idShelter),
+          hidClient: new FormControl(data.idClient),
+        });
+      });
+    }
   }
 
   cancelar(): void {
