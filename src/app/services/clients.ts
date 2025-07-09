@@ -5,21 +5,21 @@ import { clients } from '../models/clients';
 import { HttpClient } from '@angular/common/http';
 import { users } from '../models/users';
 
-const base_url = environment.base
+const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Clients {
   private url = `${base_url}/safepaws`;
   private listaCambio = new Subject<clients[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   list() {
-      return this.http.get<clients[]>(`${this.url}/client/list`);
-    }
-  
+    return this.http.get<clients[]>(`${this.url}/client/list`);
+  }
+
   delete(id: number) {
     return this.http.delete(`${this.url}/client/delete/${id}`);
   }
@@ -34,6 +34,14 @@ export class Clients {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  listId(id: number) {
+    return this.http.get<clients>(`${this.url}/client/list/${id}`);
+  }
+
+  update(id: number, so: clients) {
+    return this.http.put(`${this.url}/client/modification/${id}`, so);
   }
 
   getUsers() {

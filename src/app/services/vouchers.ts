@@ -34,4 +34,12 @@ export class Vouchers {
   getList() {
     return this.listaCambio.asObservable();
   }
+
+  listId(id: number) {
+    return this.http.get<vouchers>(`${this.url}/voucher/list/${id}`);
+  }
+
+  update(id: number, so: vouchers) {
+    return this.http.put(`${this.url}/voucher/modification/${id}`, so);
+  }
 }

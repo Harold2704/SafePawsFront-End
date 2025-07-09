@@ -37,6 +37,14 @@ export class Pets {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<pets>(`${this.url}/pet/list/${id}`);
+  }
+
+  update(id: number, so: pets) {
+    return this.http.put(`${this.url}/pet/modification/${id}`, so);
+  }
+
   getShelters() {
     return this.http.get<shelters[]>(`${this.url}/shelter/list`);
   }

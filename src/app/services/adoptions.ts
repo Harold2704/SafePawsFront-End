@@ -37,6 +37,14 @@ export class Adoptions {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<adoptions>(`${this.url}/adoption/list/${id}`);
+  }
+
+  update(id: number, so: adoptions) {
+    return this.http.put(`${this.url}/adoption/modification/${id}`, so);
+  }
+
   getClients() {
     return this.http.get<clients[]>(`${this.url}/client/list`);
   }

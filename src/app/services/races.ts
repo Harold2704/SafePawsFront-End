@@ -34,4 +34,12 @@ export class Races {
   getList() {
     return this.listaCambio.asObservable();
   }
+
+  listId(id: number) {
+    return this.http.get<races>(`${this.url}/race/list/${id}`);
+  }
+
+  update(id: number, so: races) {
+    return this.http.put(`${this.url}/race/modification/${id}`, so);
+  }
 }

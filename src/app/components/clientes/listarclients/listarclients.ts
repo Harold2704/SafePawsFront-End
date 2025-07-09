@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { clients } from '../../../models/clients';
 import { Clients } from '../../../services/clients';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listarclients',
@@ -34,13 +35,14 @@ export class Listarclients implements OnInit {
     'c6',
     'c7',
     'c8',
-    'acciones',
+    'accion01',
+    'accion02',
   ];
   filterValue: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: Clients, private snackBar: MatSnackBar) {}
+  constructor(private cS: Clients, private snackBar: MatSnackBar, private router: Router) {}
   ngOnInit(): void {
     this.cS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -87,5 +89,10 @@ export class Listarclients implements OnInit {
         });
       },
     });
+  }
+
+  editar(id: number) {
+    console.log(`Editando cliente con ID: ${id}`);
+    this.router.navigate(['/client/modification', id]);
   }
 }

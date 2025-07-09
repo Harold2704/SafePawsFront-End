@@ -36,6 +36,14 @@ export class Medicalhistories {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<medicalhistories>(`${this.url}/medicalhistory/list/${id}`);
+  }
+
+  update(id: number, so: medicalhistories) {
+    return this.http.put(`${this.url}/medicalhistory/modification/${id}`, so);
+  }
+
   getPets() {
     return this.http.get<pets[]>(`${this.url}/pet/list`);
   }

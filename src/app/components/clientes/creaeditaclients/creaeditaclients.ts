@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -19,7 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { clients } from '../../../models/clients';
 import { users } from '../../../models/users';
 import { Clients } from '../../../services/clients';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -44,6 +45,8 @@ export class Creaeditaclients implements OnInit {
   form: FormGroup = new FormGroup({});
   clients: clients = new clients();
   users: users[] = [];
+  id: number = 0;
+  edicion: boolean = false;
 
   listgender: { value: string; viewValue: string }[] = [
     { value: 'Hombre', viewValue: 'Hombre' },
@@ -55,10 +58,17 @@ export class Creaeditaclients implements OnInit {
     private cS: Clients,
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       hname: ['', [Validators.required, Validators.minLength(4)]],
       hlastName: ['', [Validators.required, Validators.minLength(4)]],
@@ -93,6 +103,7 @@ export class Creaeditaclients implements OnInit {
       hadress: ['', [Validators.required, Validators.minLength(11)]],
       hidUser: ['', [Validators.required]],
     });
+
     this.cS.getUsers().subscribe((data) => {
       this.users = data;
     });
@@ -111,19 +122,49 @@ export class Creaeditaclients implements OnInit {
     this.clients.number = this.form.value.hnumber;
     this.clients.adress = this.form.value.hadress;
     this.clients.idUser = this.form.value.hidUser;
-    this.cS.insert(this.clients).subscribe({
-      next: () => {
-        this.cS.list().subscribe((d) => {
-          this.cS.setList(d);
+
+    if (this.edicion) {
+      this.cS.update(this.id, this.clients).subscribe(() => {
+        this.cS.list().subscribe((data) => {
+          this.cS.setList(data);
         });
-        this.snackBar.open('Transacción registrada exitosamente', 'Cerrar', {
+        this.snackBar.open('Edición exitosa', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
         this.router.navigate(['/client/list']);
-      },
-    });
+      });
+    } else {
+      this.cS.insert(this.clients).subscribe(() => {
+        this.cS.list().subscribe((data) => {
+          this.cS.setList(data);
+        });
+        this.snackBar.open('Registro exitoso', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.router.navigate(['/client/list']);
+      });
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.cS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          hname: new FormControl(data.name),
+          hlastName: new FormControl(data.lastName),
+          hdni: new FormControl(data.dni),
+          hgender: new FormControl(data.gender),
+          hemail: new FormControl(data.email),
+          hnumber: new FormControl(data.number),
+          hadress: new FormControl(data.adress),
+          hidUser: new FormControl(data.idUser),
+        });
+      });
+    }
   }
 
   cancelar(): void {

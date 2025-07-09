@@ -37,6 +37,14 @@ export class Vaccinepets {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<vaccinepets>(`${this.url}/vaccinePet/list/${id}`);
+  }
+
+  update(id: number, so: vaccinepets) {
+    return this.http.put(`${this.url}/vaccinePet/modification/${id}`, so);
+  }
+
   getVaccines() {
     return this.http.get<vaccines[]>(`${this.url}/vaccine/list`);
   }

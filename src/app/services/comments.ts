@@ -37,6 +37,14 @@ export class Comments {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<comments>(`${this.url}/comments/list/${id}`);
+  }
+
+  update(id: number, so: comments) {
+    return this.http.put(`${this.url}/comments/modification/${id}`, so);
+  }
+
   getShelters() {
     return this.http.get<shelters[]>(`${this.url}/shelter/list`);
   }

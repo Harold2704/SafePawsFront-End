@@ -38,6 +38,14 @@ export class Donations {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<donations>(`${this.url}/donations/list/${id}`);
+  }
+
+  update(id: number, so: donations) {
+    return this.http.put(`${this.url}/donations/modification/${id}`, so);
+  }
+
   getShelters() {
     return this.http.get<shelters[]>(`${this.url}/shelter/list`);
   }

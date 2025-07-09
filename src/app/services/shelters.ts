@@ -36,6 +36,14 @@ export class Shelters {
     return this.listaCambio.asObservable();
   }
 
+  listId(id: number) {
+    return this.http.get<shelters>(`${this.url}/shelter/list/${id}`);
+  }
+
+  update(id: number, so: shelters) {
+    return this.http.put(`${this.url}/shelter/modification/${id}`, so);
+  }
+
   getUsers() {
     return this.http.get<users[]>(`${this.url}/users/list`);
   }

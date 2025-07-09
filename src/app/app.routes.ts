@@ -46,6 +46,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditaadoptions
+            },
+            {
+                path:'modification/:id', component:Creaeditaadoptions
             }
         ],
     },
@@ -57,6 +60,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditaclients
+            },
+            {
+                path:'modification/:id', component:Creaeditaclients
             }
         ],
     },
@@ -68,6 +74,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditacomments
+            },
+            {
+                path:'modification/:id', component:Creaeditacomments
             }
         ],
     },
@@ -79,6 +88,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditadonations
+            },
+            {
+                path:'modification/:id', component:Creaeditadonations
             }
         ],
     },
@@ -90,6 +102,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditamedicalhistories
+            },
+            {
+                path:'modification/:id', component:Creaeditamedicalhistories
             }
         ],
     },
@@ -101,6 +116,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditapets
+            },
+            {
+                path:'modification/:id', component:Creaeditapets
             }
         ],
     },
@@ -112,6 +130,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditaraces
+            },
+            {
+                path:'modification/:id', component:Creaeditaraces
             }
         ],
     },
@@ -123,6 +144,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditashelters
+            },
+            {
+                path:'modification/:id', component:Creaeditashelters
             }
         ],
     },
@@ -134,6 +158,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditavaccinepets
+            },
+            {
+                path:'modification/:id', component:Creaeditavaccinepets
             }
         ],
     },
@@ -145,6 +172,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditavaccines
+            },
+            {
+                path:'modification/:id', component:Creaeditavaccines
             }
         ],
     },
@@ -156,6 +186,9 @@ export const routes: Routes = [
             },
             {
                 path:'register', component:Creaeditavouchers
+            },
+            {
+                path:'modification/:id', component:Creaeditavouchers
             }
         ],
     },
