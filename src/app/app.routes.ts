@@ -44,6 +44,8 @@ import { Adopcionesalbergue } from './components/reportes/adopcionesalbergue/ado
 import { Alberguesnollenos } from './components/reportes/alberguesnollenos/alberguesnollenos';
 import { Top5razasadoptadas } from './components/reportes/top5razasadoptadas/top5razasadoptadas';
 import { Mascotasnoadoptadosedad } from './components/reportes/mascotasnoadoptadosedad/mascotasnoadoptadosedad';
+import { Adopcionporespecieyraza } from './components/reportes/adopcionporespecieyraza/adopcionporespecieyraza';
+import { Adopcionpormescadaanio } from './components/reportes/adopcionpormescadaanio/adopcionpormescadaanio';
 
 export const routes: Routes = [
     { 
@@ -235,6 +237,12 @@ export const routes: Routes = [
             },
             {
                 path:'mascotasNoAdoptadasPorEdad', component:Mascotasnoadoptadosedad
+            },
+            {
+                path:'mascotasAdoptadasPorEspecieYRaza', component:Adopcionporespecieyraza
+            },
+            {
+                path:'mascotasAdoptadasPorMesCadaAnio', component:Adopcionpormescadaanio
             }
         ],
     },

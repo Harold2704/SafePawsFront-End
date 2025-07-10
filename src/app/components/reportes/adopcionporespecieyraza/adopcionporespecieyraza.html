@@ -1,0 +1,38 @@
+<div class="reporte-container">
+  <h2>Mascotas Adoptadas por Especie y Raza</h2>
+  <div *ngIf="loading" class="loader">Cargando reporte...</div>
+  <div *ngIf="!loading && reporte.length === 0">No hay datos para mostrar.</div>
+  <div *ngFor="let especie of reporte" class="especie-block">
+    <div class="especie-header">
+      <h3>{{ especie.especie }}</h3>
+      <span class="total-especie">Total: {{ getTotalPorEspecie(especie) }}</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:40px"></th>
+          <th>Raza</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let raza of especie.razas; let i = index">
+          <td>
+            <span class="color-cell" [style.background]="chartColors[i % chartColors.length]"></span>
+          </td>
+          <td>{{ raza.raza }}</td>
+          <td>{{ raza.cantidad }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="chart-container">
+      <canvas baseChart
+        [datasets]="chartData[especie.especie]"
+        [labels]="chartLabels[especie.especie]"
+        [options]="chartOptions"
+        [legend]="chartLegend"
+        [type]="chartType">
+      </canvas>
+    </div>
+  </div>
+</div>
