@@ -1,1 +1,40 @@
-<p>adopcionpormescadaanio works!</p>
+<div class="reporte-container">
+  <h2>Adopciones por Mes y Año</h2>
+  <div *ngIf="loading" class="loader">Cargando reporte...</div>
+  <div *ngIf="!loading && (!adopcionesPorAnio || adopcionesPorAnio.length === 0)">No hay datos para mostrar.</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngFor="let anio of adopcionesPorAnio" class="anio-block">
+    <div class="anio-header">
+      <h3>{{ anio.anio }}</h3>
+      <span class="total-anio">Total: {{ getTotalPorAnio(anio) }}</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:40px"></th>
+          <th>Mes</th>
+          <th>Total de Adopciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mes of anio.meses; let i = index">
+          <td>
+            <span class="calendar-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#003c77" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4" width="18" height="18" rx="3" fill="#e3f2fd" stroke="#003c77" stroke-width="2"/>
+                <rect x="7" y="10" width="2" height="2" fill="#003c77"/>
+                <rect x="11" y="10" width="2" height="2" fill="#003c77"/>
+                <rect x="15" y="10" width="2" height="2" fill="#003c77"/>
+                <rect x="7" y="14" width="2" height="2" fill="#003c77"/>
+                <rect x="11" y="14" width="2" height="2" fill="#003c77"/>
+                <rect x="15" y="14" width="2" height="2" fill="#003c77"/>
+              </svg>
+            </span>
+          </td>
+          <td>{{ mes.mes }}</td>
+          <td>{{ mes.totalAdopciones }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

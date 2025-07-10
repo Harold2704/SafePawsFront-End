@@ -1,0 +1,109 @@
+.reporte-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2rem 2.5rem;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+.anio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f4f8;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+.total-anio {
+  font-weight: bold;
+  color: #003c77;
+  font-size: 1.1rem;
+}
+.adopciones-table, table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background: #fafbfc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.adopciones-table th, .adopciones-table td, table th, table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 1rem;
+}
+.adopciones-table th, table th {
+  background-color: #e3f2fd;
+  color: #003c77;
+  font-weight: 600;
+}
+.color-cell {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.calendar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e3f2fd;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 2px 6px rgba(0,60,119,0.08);
+  border: 1.5px solid #b3d1f7;
+  margin: 0 auto;
+  transition: box-shadow 0.2s;
+}
+.calendar-icon:hover {
+  box-shadow: 0 4px 12px rgba(0,60,119,0.18);
+  background: #d0e7ff;
+}
+.calendar-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.loading, .loader {
+  font-size: 1.2rem;
+  color: #003c77;
+  margin: 1rem 0;
+  text-align: center;
+}
+.error {
+  color: #d32f2f;
+  font-weight: bold;
+  margin: 1rem 0;
+  text-align: center;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 36px;
+  color: #003c77;
+  font-size: 2.1em;
+  letter-spacing: 1px;
+}
+h3 {
+  margin-top: 1.5rem;
+  color: #333;
+}
+@media (max-width: 600px) {
+  .reporte-container {
+    padding: 1rem 0.5rem;
+  }
+  .anio-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .adopciones-table th, .adopciones-table td, table th, table td {
+    padding: 7px 4px;
+    font-size: 0.95rem;
+  }
+}
