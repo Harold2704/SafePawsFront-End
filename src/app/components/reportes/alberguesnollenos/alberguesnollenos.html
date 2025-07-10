@@ -1,1 +1,24 @@
-<p>alberguesnollenos works!</p>
+<div class="title-container">
+    <div class="title" style="text-align: center;">
+        <h1>Estadistica de albergues no llenos</h1>
+    </div>
+    <!-- Etiquetas de color para cada refugio -->
+    <div *ngIf="!isLoading && hasData" class="refugio-labels" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+        <ng-container *ngFor="let label of barChartLabels; let i = index">
+            <span style="display: flex; align-items: center; gap: 0.5em; padding: 0.3em 1em; border-radius: 1em; font-size: 0.95em; font-weight: 500; min-width: 80px; text-align: left; box-shadow: 0 1px 4px #0001; background: #fff; color: #222;">
+                <span [style.background]="colorLabels[i]" style="display: inline-block; width: 1em; height: 1em; border-radius: 50%; margin-right: 0.5em; border: 2px solid #ccc;"></span>
+                {{ label }}
+            </span>
+        </ng-container>
+    </div>
+    <div *ngIf="isLoading" class="loading-message" style="text-align: center; margin: 2rem 0;">
+        Cargando...
+    </div>
+    <div *ngIf="!isLoading && !hasData" class="no-data-message" style="text-align: center; margin: 2rem 0;">
+        No hay datos para mostrar.
+    </div>
+    <div class="chart-container" style="text-align: center;" *ngIf="!isLoading && hasData">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [legend]="barChartLegend" [type]="barChartType"></canvas>
+    </div>
+</div>

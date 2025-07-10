@@ -1,1 +1,35 @@
-<p>top5razasadoptadas works!</p>
+<div class="title-container">
+    <div class="title" style="text-align: center;">
+        <h1>Top 5 Razas más Adoptadas</h1>
+    </div>
+    <div *ngIf="isLoading" class="loading-message" style="text-align: center; margin: 2rem 0;">
+        Cargando...
+    </div>
+    <div *ngIf="!isLoading && !hasData" class="no-data-message" style="text-align: center; margin: 2rem 0;">
+        No hay datos para mostrar.
+    </div>
+    <div class="chart-container" style="text-align: center;" *ngIf="!isLoading && hasData">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [legend]="barChartLegend" [type]="barChartType"></canvas>
+    </div>
+    <div class="ranking-table-container" *ngIf="!isLoading && hasData">
+        <table class="ranking-table">
+            <thead>
+                <tr>
+                    <th>Color</th>
+                    <th>Raza</th>
+                    <th>Cantidad de Adopciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of rankingData; let i = index">
+                    <td>
+                        <span class="color-dot" [ngStyle]="{'background-color': rankingColors[i]}"></span>
+                    </td>
+                    <td>{{ item.raza }}</td>
+                    <td>{{ item.cantidad }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
