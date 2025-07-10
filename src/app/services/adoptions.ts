@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { adoptions } from '../models/adoptions';
 import { HttpClient } from '@angular/common/http';
 import { clients } from '../models/clients';
 import { pets } from '../models/pets';
+import { DTOAdopcionesPorAnio } from '../models/DTOAdopcionesPorAnio';
 
 const base_url = environment.base;
 
@@ -51,5 +52,9 @@ export class Adoptions {
 
   getPets() {
     return this.http.get<pets[]>(`${this.url}/pet/list`);
+  }
+
+  getPetsAdoptedPerMonthEachYear(): Observable<DTOAdopcionesPorAnio[]> {
+    return this.http.get<DTOAdopcionesPorAnio[]>(`${this.url}/adoption/petAdoptionsByMonthForEachYear`);
   }
 }

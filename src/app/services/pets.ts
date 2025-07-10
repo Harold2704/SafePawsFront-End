@@ -9,6 +9,7 @@ import { DTOMascotasPorAlbergue } from '../models/DTOMascotasPorAlbergue';
 import { DTOAlbergueNoLlenos } from '../models/DTOAlberguesNoLlenos';
 import { DTOTop5RazasMasAdoptadas } from '../models/DTOTop5RazasMasAdoptadas';
 import { DTOMascotasPorEdadSinAdopcion } from '../models/DTOMascotasPorEdadSinAdopcion';
+import { DTOEspecieConRazas } from '../models/DTOEspecieConRazas';
 
 const base_url = environment.base;
 
@@ -55,6 +56,10 @@ export class Pets {
 
   getRaces() {
     return this.http.get<races[]>(`${this.url}/race/list`);
+  }
+
+  getPetAdoptedBySpeciesAndBreed(): Observable<DTOEspecieConRazas[]> {
+    return this.http.get<DTOEspecieConRazas[]>(`${this.url}/pet/adoptedForSpeciesAndRaceGrouped`);
   }
 
   getPetAdoptedByShelter(): Observable<DTOMascotasPorAlbergue[]> {
