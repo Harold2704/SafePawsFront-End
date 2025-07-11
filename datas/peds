@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Albergue de Mascotas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Albergue de Mascotas</h1>
+    <p>Encuentra a tu nuevo mejor amigo 🐾</p>
+  </header>
+
+  <main>
+    <div class="filtros">
+      <label for="filtroTipo">Filtrar por tipo:</label>
+      <select id="filtroTipo">
+        <option value="todos">Todos</option>
+        <option value="perro">Perros</option>
+        <option value="gato">Gatos</option>
+      </select>
+    </div>
+
+    <section id="listaMascotas" class="grid-mascotas">
+      <!-- Mascotas se cargan dinámicamente -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Albergue de Mascotas</p>
+  </footer>
+
+  <script src="app.js"></script> <!-- generado desde TypeScript -->
+</body>
+</html>
