@@ -1,0 +1,24 @@
+interface Animal {
+  nombre: string;
+  especie: string;
+  edad: number;
+}
+
+const animales: Animal[] = [
+  { nombre: "Luna", especie: "Perro", edad: 3 },
+  { nombre: "Michi", especie: "Gato", edad: 2 },
+  { nombre: "Rocky", especie: "Perro", edad: 5 },
+  { nombre: "Nube", especie: "Gato", edad: 1 }
+];
+
+const boton = document.getElementById("mostrarAnimales") as HTMLButtonElement;
+const lista = document.getElementById("listaAnimales") as HTMLUListElement;
+
+boton.addEventListener("click", () => {
+  lista.innerHTML = ""; // limpiar antes
+  animales.forEach(animal => {
+    const li = document.createElement("li");
+    li.textContent = `${animal.nombre} - ${animal.especie}, ${animal.edad} años`;
+    lista.appendChild(li);
+  });
+});
