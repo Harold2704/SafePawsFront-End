@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Albergue de Mascotas</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <h1>Albergue de Mascotas</h1>
+    <p>Encuentra a tu nuevo mejor amigo 🐾</p>
+    <button id="toggleModo">🌙 Cambiar modo</button>
+  </header>
+
+  <main>
+
+    <!-- Formulario para registrar nueva mascota -->
+    <div class="formulario">
+      <h2>Registrar nueva mascota</h2>
+      <form id="formMascota">
+        <input type="text" id="nombre" placeholder="Nombre de la mascota" required>
+        <input type="text" id="descripcion" placeholder="Descripción" required>
+        <input type="url" id="imagen" placeholder="URL de la imagen" required>
+        <select id="tipo" required>
+          <option value="" disabled selected>Selecciona tipo</option>
+          <option value="perro">Perro</option>
+          <option value="gato">Gato</option>
+        </select>
+        <button type="submit">Agregar Mascota</button>
+      </form>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <label for="filtroTipo">Filtrar por tipo:</label>
+      <select id="filtroTipo">
+        <option value="todos">Todos</option>
+        <option value="perro">Perros</option>
+        <option value="gato">Gatos</option>
+      </select>
+
+      <input type="text" id="buscador" placeholder="Buscar por nombre...">
+      <label>
+        <input type="checkbox" id="soloFavoritos"> Solo favoritos
+      </label>
+    </div>
+
+    <!-- Contador -->
+    <p id="contadorMascotas">Total: 0 mascota(s)</p>
+
+    <!-- Lista de mascotas -->
+    <section id="listaMascotas" class="grid-mascotas">
+      <!-- Mascotas se cargan dinámicamente -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Albergue de Mascotas</p>
+  </footer>
+
+  <!-- Script generado por TypeScript -->
+  <script src="app.js"></script>
+</body>
+</html>
