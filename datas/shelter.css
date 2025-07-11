@@ -1,0 +1,91 @@
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.safepawsbackend.dtos.DTOResumenAdopcionesPorRefugio;
+import pe.edu.upc.safepawsbackend.dtos.DTOShelter;
+import pe.edu.upc.safepawsbackend.entities.Shelter;
+import pe.edu.upc.safepawsbackend.serviceinterfaces.IShelterService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/safepaws")
+public class ShelterController {
+    @Autowired
+    private IShelterService sS;
+
+    //Regitrar los datos en la tabla
+    //@PreAuthorize("hasAuthority('ROLE_SHELTER') OR hasAuthority('ROLE_ADMIN')")
+    @PostMapping("/shelter/register")
+    public ResponseEntity<Shelter> register(@RequestBody DTOShelter dto) {
+        ModelMapper m = new ModelMapper();
+        Shelter ao = m.map(dto, Shelter.class);
+        sS.insert(ao);
+        return new ResponseEntity<>(ao, HttpStatus.CREATED);
+    }
+
+    //Listar todas las tablas creadas
+    //@PreAuthorize("hasAuthority('ROLE_SHELTER') OR hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/shelter/list")
+    public ResponseEntity<List<DTOShelter>> listAllShelter(){
+        List<DTOShelter> result = sS.list().stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,DTOShelter.class);
+        }).collect(Collectors.toList());
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    //Listar tablas pero por id
+    //@PreAuthorize("hasAuthority('ROLE_SHELTER') OR hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/shelter/list/{id}")
+    public ResponseEntity<DTOShelter> listById(@PathVariable("id") Long id) {
+        ModelMapper m = new ModelMapper();
+        DTOShelter dto = m.map(sS.listById(id), DTOShelter.class);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    //Modificar todos los datos de la tabla por id
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PutMapping("/shelter/modification/{id}")
+    public ResponseEntity<Shelter> modification(@PathVariable("id") Long id, @RequestBody DTOShelter dto) {
+        ModelMapper m = new ModelMapper();
+        Shelter ao = m.map(dto, Shelter.class);
+        ao.setIdShelter(id);
+        sS.update(ao);
+        return new ResponseEntity<>(ao, HttpStatus.OK);
+    }
+
+    //Eliminar una tabla por id
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @DeleteMapping("/shelter/delete/{id}")
+    public ResponseEntity<Shelter> deleteById(@PathVariable("id") Long id) {
+        sS.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // Resumen de adopciones por albergue
+    // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/shelter/adoptionSummaryForShelter")
+    public List<DTOResumenAdopcionesPorRefugio> resumenAdopcionesPorAlbergue() {
+        List<String[]> resultados = sS.resumenAdopcionesPorAlbergue();
+        List<DTOResumenAdopcionesPorRefugio> listaDTO = new ArrayList<>();
+
+        for (String[] resultado : resultados) {
+            DTOResumenAdopcionesPorRefugio dto = new DTOResumenAdopcionesPorRefugio();
+            dto.setNombreAlbergue(resultado[0]);
+            dto.setMascotasAdoptadas(Integer.parseInt(resultado[1]));
+            dto.setMascotasNoAdoptadas(Integer.parseInt(resultado[2]));
+            listaDTO.add(dto);
+        }
+
+        return listaDTO;
+    }
+}
+
