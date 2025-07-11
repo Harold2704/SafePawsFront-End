@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "none",
+    "outFile": "app.js",
+    "strict": true
+  },
+  "include": ["app.ts"]
+}
