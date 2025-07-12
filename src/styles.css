@@ -1,4 +1,293 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f0f0;
+}
+
+.logo {
+    display: flex;
+
+}
+
+.logo img {
+    height: 65px;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2472C3;
+    padding: 15px 90px 15px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links a {
+    margin-left: 50px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: red;
+}
+
+.nav-links a.active {
+    border-bottom: 3px solid #fff;
+    padding-bottom: 3px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 275px;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    padding: 50px 20px;
+    background-color: #EAF3F0;
+    gap: 200px;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    max-width: 525px;
+}
+
+.hero-text h1 {
+    font-size: 35px;
+    color: #AF0F4B;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    padding: 10px 20px;
+    background-color: #AF0F4B;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.services-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: white;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.service-text {
+    max-width: 825px;
+}
+
+.service-text h1 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #AF0F4B;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.service-text p {
+    font-size: 18px;
+    text-align: center;
+
+}
+
+.services-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding: 60px 20px;
+    background-color: #FDF9ED;
+}
+
+.service-card {
+    max-width: 385px;
+    background-color: white;
+    min-height: 300px;
+    border-radius: 20px;
+    box-shadow: 2.5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.service-card img {
+    width: 90px;
+    height: 90px;
+    display: block;
+    margin: 15px auto;
+}
+
+.service-card h1 {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+}
+
+.service-card p {
+    text-align: left;
+    padding: 15px 35px 0px 35px;
+}
+
+.reason {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px 100px 40px;
+    background-color: white;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.reason-text {
+    max-width: 800px;
+}
+
+.reason-text h1 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #AF0F4B;
+    margin-bottom: 10px;
+    text-align: center;
+    margin: 10px 90px 40px 90px;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.reason-text p {
+    font-size: 18px;
+    text-align: center;
+}
+
+/* New container for horizontal cards */
+.reason-cards {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.reason-card {
+    max-width: 325px;
+    min-height: 275px;
+    background-color: #F77F7D;
+    border-radius: 20px;
+    box-shadow: 2.5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.reason-card h1 {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.reason-card p {
+    text-align: center;
+    padding: 0px 20px 20px 20px;
+}
+
+.workteam {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px 100px 40px;
+    background-color: #FDF9ED;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.workteam h1 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #AF0F4B;
+    margin-bottom: 10px;
+    text-align: center;
+    margin: 40px 0px;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.team-cards{
+    display: flex;
+    gap: 60px;
+}
+
+.team-card img{
+    height: 200px;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.team-card h2{
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-info {
+    background-color: #10346A;
+    display: flex;
+    justify-content:space-between;
+    padding: 60px 60px;
+}
+
+.contact-info img{
+    height: 90px;
+}
+
+.contact-info-text {
+    display: flex;
+    gap: 175px;
+}
+
+.contact-info-text div {
+    color: white;
+}
+
+.contact-info-text h1{
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.contact-info-text ul {
+    font-size: 16px;
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.contact-icons img{
+    height: 45px;
+    margin-top: 40px;
+    margin-left: 10px;
+}
